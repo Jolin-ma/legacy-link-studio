@@ -33,7 +33,7 @@ const steps: Step[] = [
   {
     n: "03",
     title: "We craft your film",
-    copy: "Your own photos and clips are woven together with cinematic AI-recreated scenes for the moments you don't have on camera, scored and paced like a real short film.",
+    copy: "Your own photos and clips are woven together with cinematic AI-recreated scenes for the moments you don't have on camera, scored and paced like a real short film — most run 60 to 90 seconds, long enough to tell it, short enough to watch again and again.",
     note: {
       q: "How long does it take?",
       a: "Most films are delivered within 7–10 days of completing your intake and checkout.",

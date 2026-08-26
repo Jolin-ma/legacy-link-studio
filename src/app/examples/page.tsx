@@ -11,7 +11,7 @@ const STILL_GRADIENT =
 const films = [
   {
     names: "Maya & Theo",
-    caption: "Ten years of long-distance, told in eight minutes.",
+    caption: "Ten years of long-distance, told in ninety seconds.",
   },
   {
     names: "Priya & Sam",

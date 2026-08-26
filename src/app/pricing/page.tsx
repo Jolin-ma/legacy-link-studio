@@ -9,17 +9,17 @@ const tiers = [
   {
     name: "Spark",
     price: "$59",
-    copy: "An animated photo slideshow set to music, with light AI generation to bring stills to life. Delivered digitally, ready to share the same week.",
+    copy: "An animated photo slideshow set to music, with light AI generation to bring stills to life. Delivered digitally, as generated, ready to share the same week.",
   },
   {
     name: "Forever",
     price: "$149",
-    copy: "A full cinematic mini-film blending your own footage with AI-recreated scenes for the moments you don't have on camera, with optional narration and a locked-reveal link that unlocks on your chosen date.",
+    copy: "A full cinematic mini-film blending your own footage with AI-recreated scenes for the moments you don't have on camera, with optional narration and a locked-reveal link that unlocks on your chosen date. Includes one round of revisions — swap a scene, adjust the tone or pacing, or change the music — so the film comes back exactly right before it's sealed.",
   },
   {
     name: "Heirloom",
     price: "$219",
-    copy: "Everything in Forever, plus a printed keepsake card with a QR code to your capsule, and a small photo book — shipped to your door.",
+    copy: "Everything in Forever, including the revision round, plus a printed keepsake card with a QR code to your capsule, and a small photo book — shipped to your door.",
   },
 ];
 

@@ -29,7 +29,7 @@ Status snapshot of the build against `legacy-link-site-spec.md` and `legacy-link
 | `/capsule/[token]` | ✅ Built | Full reveal state machine — pre-production, countdown, reveal-button, auto-unlock, unlocked/permanent, PIN gate, invalid-token fallback |
 | `/about` | ✅ Built | Founder narrative + craft/portfolio note |
 | `/faq` | ✅ Built | Practical + gift-flow questions |
-| `/legal/terms`, `/legal/privacy` | 🟡 Placeholder | Content not yet written |
+| `/legal/terms`, `/legal/privacy` | ✅ Built | Full terms/privacy content, tailored to the reveal mechanic, gift flow, and Heirloom shipping; opens with a brief honest note on the portfolio-project context |
 
 Legend: ✅ built and verified in-browser · 🟡 placeholder/stub · ⬜ not started
 
@@ -66,5 +66,4 @@ This is why "no real payment," "no real email," and "no real production pipeline
 ## Suggested next steps
 
 1. Generate real Higgsfield sample videos/stills (unlocks Home, Examples, and capsule cover content).
-2. Write real Terms/Privacy copy.
-3. If moving toward a real deployment: Postgres + API routes behind the existing `orders.ts`/`order-draft.ts` interfaces, Stripe Checkout behind `checkout-client.tsx`, and a transactional email service for the ready/reveal notifications already modeled in `CapsuleOrder`.
+2. If moving toward a real deployment: Postgres + API routes behind the existing `orders.ts`/`order-draft.ts` interfaces, Stripe Checkout behind `checkout-client.tsx`, and a transactional email service for the ready/reveal notifications already modeled in `CapsuleOrder`.

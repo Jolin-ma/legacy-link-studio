@@ -68,13 +68,15 @@ Prepared as a project-analyst research brief: concept, market audit, feasibility
 
 Modeled directly against Tribute's validated $35–$299 range and Love Tales' book pricing, adapted to a video product with an AI-generation cost floor (Higgsfield credit cost, see §7.3):
 
-| Tier | Price (suggested) | What's included |
-|---|---|---|
-| **Spark** | $49–$69 | Animated photo slideshow with music; light AI generation; digital delivery only |
-| **Forever** | $129–$179 | Full cinematic mini-film, AI-recreated scenes, optional narration, locked-reveal link |
-| **Heirloom** | $199–$249 | Everything in Forever + a physical keepsake (printed QR card/plaque, small photo book), shipped |
+| Tier | Price (suggested) | What's included | Revisions |
+|---|---|---|---|
+| **Spark** | $49–$69 | Animated photo slideshow with music; light AI generation; digital delivery only | None — fully self-serve |
+| **Forever** | $129–$179 | Full cinematic mini-film, AI-recreated scenes, optional narration, locked-reveal link | One included revision round (swap a scene, adjust tone/pacing, change the music) |
+| **Heirloom** | $199–$249 | Everything in Forever + a physical keepsake (printed QR card/plaque, small photo book), shipped | One included revision round (same scope as Forever) |
 
-Add-on ideas once validated: rush delivery, extra scene recreations, a "vow renewal" or "5-years-later" follow-up capsule.
+**Revision policy rationale:** Spark stays a self-serve, no-touch product — at its price point, an open-ended revision commitment would erode the margin the entry tier needs to hold. Forever and Heirloom each include one revision round, which is what turns them from "a vending machine" into something that feels like a real service worth the price step-up. This mirrors how Tribute splits its DIY vs. Concierge tiers — the free-form editing commitment is reserved for the tiers priced to support it. Additional revision rounds beyond the included one are a natural rush-delivery-style add-on once the core flow is validated.
+
+Add-on ideas once validated: rush delivery, extra scene recreations, additional revision rounds, a "vow renewal" or "5-years-later" follow-up capsule.
 
 ---
 

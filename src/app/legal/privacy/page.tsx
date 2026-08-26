@@ -1,14 +1,81 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/page-placeholder";
+import { LegalDocument, type LegalSection } from "@/components/legal/legal-document";
 
 export const metadata: Metadata = { title: "Privacy — Legacy Link Studio" };
 
+const sections: LegalSection[] = [
+  {
+    heading: "1. What we collect",
+    paragraphs: [
+      "To build your film, we collect what you enter during the intake flow: names, relationship dates, written answers about your story, the tone and music preferences you choose, and the photos, video clips, and voice notes you upload.",
+      "To fulfill and deliver an order, we collect an email address for your receipt, recipient email address(es) for the reveal link, a reveal date and unlock preference, and — for Heirloom orders — a shipping address. If you're placing an order as a gift, we collect your name and email separately from the couple's details.",
+      "We don't collect full payment card numbers ourselves; those are handled directly by our payment processor.",
+    ],
+  },
+  {
+    heading: "2. How we use it",
+    paragraphs: [
+      "We use what you submit to produce your film, operate the locked-reveal mechanic, deliver order updates, and provide support if something goes wrong. We don't use your photos, footage, or story details for advertising or to train unrelated products.",
+    ],
+  },
+  {
+    heading: "3. How we share it",
+    paragraphs: [
+      "We share the minimum necessary information with a small number of third parties who help us operate: a payment processor to handle checkout, AI video-generation infrastructure to produce your film, and — for Heirloom orders — a shipping carrier to deliver the physical keepsake. We don't sell personal information to anyone.",
+    ],
+  },
+  {
+    heading: "4. How long we keep it",
+    paragraphs: [
+      "We retain your submitted photos, footage, and story details for as long as your capsule remains active, so the film can continue to be viewed at its link. If you'd like your source material deleted after delivery while keeping the finished film accessible, contact us and we'll take care of it.",
+    ],
+  },
+  {
+    heading: "5. Access, PINs, and reveal tokens",
+    paragraphs: [
+      "Your capsule link is a long, unguessable identifier rather than a login — it is the credential. Heirloom orders add a 4-digit PIN as a second factor. Treat both as you would any private link or password: whoever holds them can view the capsule once it unlocks.",
+    ],
+  },
+  {
+    heading: "6. Your choices",
+    paragraphs: [
+      "You can request a copy of the information tied to your order, ask us to correct it, or ask us to delete it (subject to what's needed to keep a delivered capsule functioning) by contacting us at the email below.",
+    ],
+  },
+  {
+    heading: "7. Children",
+    paragraphs: [
+      "The Service is intended for adults placing orders about their own relationships or gifting one to someone else. We don't knowingly collect personal information directly from children, though photos or footage submitted as part of a couple's story may naturally include family members of any age.",
+    ],
+  },
+  {
+    heading: "8. Cookies and analytics",
+    paragraphs: [
+      "This site may use basic, privacy-respecting analytics to understand overall traffic and improve the experience. We don't use third-party advertising trackers.",
+    ],
+  },
+  {
+    heading: "9. Changes to this policy",
+    paragraphs: [
+      "If we make a material change to this policy, we'll update the \"Last updated\" date above.",
+    ],
+  },
+  {
+    heading: "10. Contact",
+    paragraphs: [
+      "Questions about this policy, or requests about your data, can be sent to info@legacylinkstudio.com.",
+    ],
+  },
+];
+
 export default function PrivacyPage() {
   return (
-    <PagePlaceholder
+    <LegalDocument
       eyebrow="Legal"
       title="Privacy Policy"
-      copy="Full privacy policy will be published here before launch."
+      updated="August 25, 2026"
+      intro="Legacy Link Studio is a portfolio project built to demonstrate a complete product experience end to end — but this policy is written the way it would read for a real, operating business, since that's the point of the exercise."
+      sections={sections}
     />
   );
 }

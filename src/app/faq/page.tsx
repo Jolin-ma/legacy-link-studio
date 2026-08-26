@@ -10,6 +10,10 @@ const faqs = [
     a: "Five or more photos is a good starting point — the more you share, the more of your real story we can use. Anything you don't have, we recreate.",
   },
   {
+    q: "How long is the finished film?",
+    a: "Every film runs 60–90 seconds — long enough to actually tell the story, short enough to watch again and again.",
+  },
+  {
     q: "How long does it take?",
     a: "Most films are delivered within 7–10 days of completing your intake and checkout.",
   },
