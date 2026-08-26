@@ -5,6 +5,7 @@ export type OrderDraft = Pick<
   | "giverName"
   | "giverEmail"
   | "notifyMode"
+  | "tier"
   | "partner1Name"
   | "partner2Name"
   | "milestone"
@@ -13,9 +14,13 @@ export type OrderDraft = Pick<
   | "revealDate"
   | "revealMode"
   | "recipientEmails"
-  | "tier"
+  | "displayAddon"
   | "shippingAddress"
+  | "sparkTitle"
+  | "sparkCaptions"
 > & {
+  deliveryType: "gallery" | "film";
+  sparkPhotoCount: number;
   photoCount: number;
   videoCount: number;
   hasVoiceNote: boolean;
@@ -28,16 +33,21 @@ export function buildOrderDraft(data: IntakeData): OrderDraft {
     giverName: data.giverName,
     giverEmail: data.giverEmail,
     notifyMode: data.notifyMode,
+    tier: data.tier,
     partner1Name: data.partner1Name,
     partner2Name: data.partner2Name,
     milestone: data.milestone,
     milestoneOther: data.milestoneOther,
     tone: data.tone,
-    revealDate: data.revealDate,
-    revealMode: data.revealMode,
+    revealDate: data.tier === "spark" ? "" : data.revealDate,
+    revealMode: data.tier === "spark" ? "" : data.revealMode,
     recipientEmails: data.recipientEmails,
-    tier: data.tier,
+    displayAddon: data.tier === "heirloom" ? true : data.displayAddon,
     shippingAddress: data.shippingAddress,
+    sparkTitle: data.sparkTitle,
+    sparkCaptions: data.sparkCaptions,
+    deliveryType: data.tier === "spark" ? "gallery" : "film",
+    sparkPhotoCount: data.sparkPhotos.length,
     photoCount: data.photos.length,
     videoCount: data.videos.length,
     hasVoiceNote: data.voiceNote !== null,

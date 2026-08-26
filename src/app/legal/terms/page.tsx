@@ -20,8 +20,8 @@ const sections: LegalSection[] = [
   {
     heading: "3. Accounts and access",
     paragraphs: [
-      "The Service does not require a login. Your capsule link is an unguessable, private URL — anyone who has it can view the capsule once it unlocks, so treat it the way you'd treat a shared document or photo album. Heirloom orders add an additional 4-digit PIN printed on the physical card as a second layer of access.",
-      "If a link is lost, contact us using the email associated with your order and we'll help you recover it. We cannot recover a lost PIN independently of the link.",
+      "The Service does not require a login. Your capsule link is an unguessable, private URL — anyone who has it can view the capsule once it unlocks, so treat it the way you'd treat a shared document or photo album.",
+      "If a link is lost, contact us using the email associated with your order and we'll help you recover it.",
     ],
   },
   {
@@ -50,7 +50,7 @@ const sections: LegalSection[] = [
     paragraphs: [
       "Because each film is custom-produced for your order, we're only able to offer a full refund if you cancel before production has meaningfully begun. Once AI generation or editing work has started, we may offer a partial refund at our discretion, but can't guarantee one.",
       "If your finished film has a genuine quality problem — corrupted delivery, a technical failure of the reveal mechanic, or a film that doesn't reflect the intake you submitted — contact us and we'll make it right, typically with a correction or a partial refund.",
-      "Heirloom's physical keepsake ships once produced; if it arrives damaged, contact us within 14 days of delivery for a replacement.",
+      "Orders with the Display add-on (standalone, or included with Heirloom) ship as a separate, independently tracked leg from your digital delivery — adding or including it never delays your gallery or film. If the device arrives damaged, contact us within 14 days of delivery for a replacement.",
     ],
   },
   {

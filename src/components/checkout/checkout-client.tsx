@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FieldShell, TextField } from "@/components/intake/ui";
-import { MILESTONE_LABELS, REVEAL_MODE_LABELS, TIER_DETAILS } from "@/lib/intake-labels";
+import { DISPLAY_ADDON_PRICE, MILESTONE_LABELS, REVEAL_MODE_LABELS, TIER_DETAILS } from "@/lib/intake-labels";
 import { clearOrderDraft, loadOrderDraft, type OrderDraft } from "@/lib/order-draft";
 import { generateOrderId } from "@/lib/ids";
 import { createOrder } from "@/lib/orders";
@@ -39,8 +39,17 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+function orderTotal(draft: OrderDraft): number {
+  if (draft.tier === "") return 0;
+  const base = TIER_DETAILS[draft.tier].price;
+  // Heirloom's Display is bundled into its price already — don't double-charge.
+  const addon = draft.displayAddon && draft.tier !== "heirloom" ? DISPLAY_ADDON_PRICE : 0;
+  return base + addon;
+}
+
 function OrderSummary({ draft }: { draft: OrderDraft }) {
   const tier = draft.tier === "" ? null : TIER_DETAILS[draft.tier];
+  const isSpark = draft.tier === "spark";
   const occasion =
     draft.milestone === "other"
       ? draft.milestoneOther
@@ -63,27 +72,49 @@ function OrderSummary({ draft }: { draft: OrderDraft }) {
 
       <div className="mt-10 border-t hairline">
         <SummaryRow label="Gift from" value={draft.giverName} />
-        <SummaryRow
-          label="For"
-          value={[draft.partner1Name, draft.partner2Name].filter(Boolean).join(" & ")}
-        />
-        <SummaryRow label="Occasion" value={occasion} />
-        <SummaryRow label="Reveal date" value={draft.revealDate} />
-        <SummaryRow
-          label="Reveal"
-          value={draft.revealMode === "" ? "" : REVEAL_MODE_LABELS[draft.revealMode]}
-        />
+        {isSpark ? (
+          <>
+            <SummaryRow label="Title" value={draft.sparkTitle} />
+            <SummaryRow
+              label="Photos"
+              value={draft.sparkPhotoCount ? `${draft.sparkPhotoCount} uploaded` : ""}
+            />
+          </>
+        ) : (
+          <>
+            <SummaryRow
+              label="For"
+              value={[draft.partner1Name, draft.partner2Name].filter(Boolean).join(" & ")}
+            />
+            <SummaryRow label="Occasion" value={occasion} />
+            <SummaryRow label="Reveal date" value={draft.revealDate} />
+            <SummaryRow
+              label="Reveal"
+              value={draft.revealMode === "" ? "" : REVEAL_MODE_LABELS[draft.revealMode]}
+            />
+            <SummaryRow
+              label="Photos"
+              value={draft.photoCount ? `${draft.photoCount} uploaded` : ""}
+            />
+            <SummaryRow
+              label="Video clips"
+              value={draft.videoCount ? `${draft.videoCount} uploaded` : ""}
+            />
+            <SummaryRow label="Voice note" value={draft.hasVoiceNote ? "Included" : ""} />
+          </>
+        )}
         <SummaryRow label="Recipients" value={draft.recipientEmails} />
         <SummaryRow
-          label="Photos"
-          value={draft.photoCount ? `${draft.photoCount} uploaded` : ""}
+          label="Display device"
+          value={
+            draft.tier === "heirloom"
+              ? "Included"
+              : draft.displayAddon
+              ? `Added (+$${DISPLAY_ADDON_PRICE})`
+              : ""
+          }
         />
-        <SummaryRow
-          label="Video clips"
-          value={draft.videoCount ? `${draft.videoCount} uploaded` : ""}
-        />
-        <SummaryRow label="Voice note" value={draft.hasVoiceNote ? "Included" : ""} />
-        {draft.tier === "heirloom" ? (
+        {draft.displayAddon || draft.tier === "heirloom" ? (
           <SummaryRow
             label="Ships to"
             value={[
@@ -104,7 +135,7 @@ function OrderSummary({ draft }: { draft: OrderDraft }) {
           <span className="font-sans text-[13px] uppercase tracking-wider2 text-charcoal">
             Total
           </span>
-          <span className="font-display text-2xl text-charcoal">${tier.price}</span>
+          <span className="font-display text-2xl text-charcoal">${orderTotal(draft)}</span>
         </div>
       ) : null}
     </div>
@@ -241,7 +272,7 @@ export function CheckoutClient() {
             disabled={!paymentValid}
             className="mt-12 w-full border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory disabled:cursor-not-allowed disabled:border-charcoal/15 disabled:text-charcoal/30 disabled:hover:bg-transparent disabled:hover:text-charcoal/30"
           >
-            {tier ? `Complete Payment — $${tier.price}` : "Complete Payment"}
+            {tier ? `Complete Payment — $${orderTotal(draft)}` : "Complete Payment"}
           </button>
 
           <p className="mt-4 font-sans text-[13px] italic text-charcoal/40">

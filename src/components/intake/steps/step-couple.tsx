@@ -2,13 +2,11 @@
 
 import type { IntakeData } from "../types";
 import { FieldShell, TextField, SelectField } from "../ui";
+import { MILESTONE_LABELS } from "@/lib/intake-labels";
 
-const milestoneOptions = [
-  { value: "wedding", label: "Wedding" },
-  { value: "anniversary", label: "Anniversary" },
-  { value: "proposal", label: "Proposal" },
-  { value: "other", label: "Something else" },
-];
+const milestoneOptions = (
+  Object.entries(MILESTONE_LABELS) as [keyof typeof MILESTONE_LABELS, string][]
+).map(([value, label]) => ({ value, label }));
 
 export function StepCouple({
   data,

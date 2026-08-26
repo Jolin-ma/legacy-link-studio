@@ -18,6 +18,8 @@ export function OrderConfirmationClient({ id }: { id: string }) {
   }
 
   const isGift = !!order?.giverName;
+  const isSpark = order?.tier === "spark";
+  const deliveryWord = order?.deliveryType === "gallery" ? "gallery" : "film";
 
   return (
     <div className="mx-auto max-w-xl px-6 py-32 text-center md:px-10">
@@ -25,13 +27,18 @@ export function OrderConfirmationClient({ id }: { id: string }) {
         Order Confirmed
       </p>
       <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
-        {isGift
+        {isSpark
+          ? isGift
+            ? "Their gallery is coming to life."
+            : "Your gallery is coming to life."
+          : isGift
           ? "Their story is on its way to becoming a film."
           : "Your story is on its way to becoming a film."}
       </h1>
       <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
-        We&rsquo;ve received everything and production begins now, with an
-        estimated delivery in 7&ndash;10 days.
+        {isSpark
+          ? "We've received your photos and generation is underway — your gallery link is ready below."
+          : "We've received everything and production begins now, with an estimated delivery in 7–10 days."}
       </p>
       <p className="mt-10 font-sans text-xs uppercase tracking-wider2 text-charcoal/40">
         Order #{id}
@@ -50,12 +57,17 @@ export function OrderConfirmationClient({ id }: { id: string }) {
               when the time is right.
             </p>
           ) : null}
-          {order.pin ? (
+          {order.displayAddon && order.displayFulfillment ? (
             <p className="mt-6 font-sans text-sm text-charcoal/60">
-              Your keepsake PIN is{" "}
-              <span className="font-display text-lg text-charcoal">{order.pin}</span> — it
-              travels with the printed card and is asked for whenever the
-              capsule is opened on a new device.
+              {isSpark
+                ? `Your ${deliveryWord} is ready above`
+                : `Your ${deliveryWord} above will unlock on its own timeline`}{" "}
+              &mdash; your Display device is a separate leg, on its way and
+              expected around{" "}
+              <span className="text-charcoal/80">
+                {order.displayFulfillment.estimatedDelivery}
+              </span>
+              . We&rsquo;ll track it on your order status page, not this one.
             </p>
           ) : null}
         </div>

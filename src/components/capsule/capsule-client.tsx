@@ -33,59 +33,35 @@ function Countdown({ revealAt, now }: { revealAt: number; now: number }) {
   );
 }
 
-function PinGate({
-  order,
-  onVerified,
-}: {
-  order: CapsuleOrder;
-  onVerified: () => void;
-}) {
-  const [pin, setPin] = useState("");
-  const [error, setError] = useState(false);
-
-  const submit = () => {
-    if (pin === order.pin) {
-      sessionStorage.setItem(`capsulePin:${order.revealToken}`, "verified");
-      onVerified();
-    } else {
-      setError(true);
-    }
-  };
+function SparkGallery({ order }: { order: CapsuleOrder }) {
+  const count = order.sparkCaptions.length || 3;
+  const items = Array.from({ length: count }, (_, i) => ({
+    n: i + 1,
+    caption: order.sparkCaptions[i] ?? "",
+  }));
 
   return (
     <>
       <p className="font-sans text-[13px] uppercase tracking-wider2 text-ivory/60">
-        This capsule is protected
+        {order.sparkTitle || "Your Gallery"}
       </p>
-      <p className="mt-6 font-display text-2xl italic text-ivory/80">
-        Enter your keepsake PIN
+      <p className="mt-6 font-sans text-sm text-ivory/50">
+        This is yours to keep, and to watch again whenever you&rsquo;d like.
       </p>
-      <input
-        type="text"
-        inputMode="numeric"
-        maxLength={4}
-        value={pin}
-        onChange={(e) => {
-          setError(false);
-          setPin(e.target.value.replace(/\D/g, ""));
-        }}
-        onKeyDown={(e) => e.key === "Enter" && submit()}
-        className="mt-8 w-full border-0 border-b border-ivory/30 bg-transparent pb-3 text-center font-display text-4xl tracking-[0.3em] text-ivory placeholder:text-ivory/20 focus:border-ivory focus:outline-none"
-        placeholder="&middot;&middot;&middot;&middot;"
-      />
-      {error ? (
-        <p className="mt-4 font-sans text-sm text-gold-light">
-          That PIN doesn&rsquo;t match — check the printed card and try again.
-        </p>
-      ) : null}
-      <button
-        type="button"
-        onClick={submit}
-        disabled={pin.length !== 4}
-        className="mt-8 border border-ivory/50 px-8 py-3 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-espresso disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ivory"
-      >
-        Unlock
-      </button>
+      <div className="mt-10 grid grid-cols-2 gap-4 text-left">
+        {items.map((item) => (
+          <div key={item.n} className="aspect-[3/4] border border-ivory/15 p-4">
+            <span className="font-sans text-[11px] uppercase tracking-wider2 text-ivory/40">
+              {String(item.n).padStart(2, "0")}
+            </span>
+            {item.caption ? (
+              <p className="mt-2 font-display text-sm italic text-ivory/70">
+                &ldquo;{item.caption}&rdquo;
+              </p>
+            ) : null}
+          </div>
+        ))}
+      </div>
     </>
   );
 }
@@ -93,15 +69,10 @@ function PinGate({
 export function CapsuleClient({ token }: { token: string }) {
   const [loaded, setLoaded] = useState(false);
   const [order, setOrder] = useState<CapsuleOrder | null>(null);
-  const [pinVerified, setPinVerified] = useState(false);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    const found = getOrderByToken(token);
-    setOrder(found);
-    if (found?.tier === "heirloom") {
-      setPinVerified(sessionStorage.getItem(`capsulePin:${token}`) === "verified");
-    }
+    setOrder(getOrderByToken(token));
     setLoaded(true);
   }, [token]);
 
@@ -143,14 +114,6 @@ export function CapsuleClient({ token }: { token: string }) {
     );
   }
 
-  if (order.tier === "heirloom" && !pinVerified) {
-    return (
-      <CapsuleShell>
-        <PinGate order={order} onVerified={() => setPinVerified(true)} />
-      </CapsuleShell>
-    );
-  }
-
   const names = [order.partner1Name, order.partner2Name].filter(Boolean).join(" & ");
 
   if (!isReady) {
@@ -171,6 +134,13 @@ export function CapsuleClient({ token }: { token: string }) {
   }
 
   if (isUnlocked) {
+    if (order.deliveryType === "gallery") {
+      return (
+        <CapsuleShell>
+          <SparkGallery order={order} />
+        </CapsuleShell>
+      );
+    }
     return (
       <CapsuleShell>
         <p className="font-sans text-[13px] uppercase tracking-wider2 text-ivory/60">

@@ -1,4 +1,12 @@
-export type Milestone = "wedding" | "anniversary" | "proposal" | "other";
+export type Milestone =
+  | "wedding"
+  | "anniversary"
+  | "proposal"
+  | "just_started"
+  | "few_months"
+  | "one_year"
+  | "no_milestone"
+  | "other";
 
 export type Tone = "romantic" | "playful" | "cinematic" | "documentary";
 
@@ -16,35 +24,43 @@ export interface IntakeData {
   giverEmail: string;
   notifyMode: NotifyMode | "";
 
-  // Step 1 — The Couple
+  // Step 1 — Choose Your Package (always first, branches everything after it)
+  tier: Tier | "";
+
+  // Spark path — Step 2A: Your Photos
+  sparkPhotos: File[];
+  sparkCaptions: string[];
+  sparkTitle: string;
+
+  // Forever/Heirloom path — Step 2B: The Couple
   partner1Name: string;
   partner2Name: string;
   relationshipStart: string;
   milestone: Milestone | "";
   milestoneOther: string;
 
-  // Step 2 — The Story
+  // Forever/Heirloom path — Step 3B: The Story
   howMet: string;
   earlyDays: string;
   proposalMoment: string;
   secretDetail: string;
   tone: Tone | "";
 
-  // Step 3 — The Footage
+  // Forever/Heirloom path — Step 4B: The Footage
   photos: File[];
   videos: File[];
   voiceNote: File | null;
   musicPreference: MusicPreference | "";
   songChoice: string;
 
-  // Step 4 — The Reveal
+  // Spark: Step 3A / Forever/Heirloom: Step 5B — Delivery & Reveal
   revealDate: string;
   revealMode: RevealMode | "";
   recipientEmails: string;
   personalNote: string;
 
-  // Step 5 — Package & Review
-  tier: Tier | "";
+  // The Display add-on — optional on Spark/Forever, always on for Heirloom
+  displayAddon: boolean;
   shippingAddress: {
     line1: string;
     line2: string;
@@ -59,6 +75,12 @@ export const emptyIntakeData: IntakeData = {
   giverName: "",
   giverEmail: "",
   notifyMode: "",
+
+  tier: "",
+
+  sparkPhotos: [],
+  sparkCaptions: [],
+  sparkTitle: "",
 
   partner1Name: "",
   partner2Name: "",
@@ -83,7 +105,7 @@ export const emptyIntakeData: IntakeData = {
   recipientEmails: "",
   personalNote: "",
 
-  tier: "",
+  displayAddon: false,
   shippingAddress: {
     line1: "",
     line2: "",

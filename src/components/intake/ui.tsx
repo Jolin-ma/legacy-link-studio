@@ -149,6 +149,133 @@ export function RadioGroup({
   );
 }
 
+export function CheckboxField({
+  checked,
+  onChange,
+  label,
+  description,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label: string;
+  description?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!checked)}
+      className="flex w-full items-start gap-4 border-b hairline pb-6 pt-1 text-left transition-colors duration-300"
+    >
+      <span
+        className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center border transition-colors duration-300 ${
+          checked ? "border-gold bg-gold" : "border-charcoal/30"
+        }`}
+      >
+        {checked ? (
+          <span className="h-2 w-2 bg-ivory" />
+        ) : null}
+      </span>
+      <span>
+        <span className="block font-display text-xl text-charcoal">{label}</span>
+        {description ? (
+          <span className="mt-1 block font-sans text-sm text-charcoal/60">
+            {description}
+          </span>
+        ) : null}
+      </span>
+    </button>
+  );
+}
+
+export function CaptionedPhotosField({
+  label,
+  hint,
+  max,
+  files,
+  captions,
+  onChange,
+}: {
+  label: string;
+  hint?: string;
+  max: number;
+  files: File[];
+  captions: string[];
+  onChange: (files: File[], captions: string[]) => void;
+}) {
+  const handleFiles = (incoming: File[]) => {
+    const combined = [...files, ...incoming].slice(0, max);
+    const combinedCaptions = combined.map((_, i) => captions[i] ?? "");
+    onChange(combined, combinedCaptions);
+  };
+
+  const removeAt = (index: number) => {
+    const nextFiles = files.filter((_, i) => i !== index);
+    const nextCaptions = captions.filter((_, i) => i !== index);
+    onChange(nextFiles, nextCaptions);
+  };
+
+  const setCaption = (index: number, value: string) => {
+    const nextCaptions = [...captions];
+    nextCaptions[index] = value;
+    onChange(files, nextCaptions);
+  };
+
+  return (
+    <FieldShell label={label} hint={hint}>
+      {files.length < max ? (
+        <label className="flex cursor-pointer flex-col items-start border-b hairline pb-6 pt-2 transition-colors duration-300 hover:border-gold">
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            className="sr-only"
+            onChange={(e) => handleFiles(Array.from(e.target.files ?? []))}
+          />
+          <span className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+            {files.length > 0 ? "Add more" : "Choose photos"}
+          </span>
+          <span className="mt-2 font-sans text-sm text-charcoal/60">
+            {files.length > 0
+              ? `${files.length} of ${max} selected`
+              : `Nothing selected yet — choose up to ${max}`}
+          </span>
+        </label>
+      ) : null}
+
+      {files.length > 0 ? (
+        <div className="mt-6 space-y-6">
+          {files.map((file, i) => (
+            <div key={`${file.name}-${i}`} className="flex items-start gap-4">
+              <span className="mt-3 font-sans text-[13px] text-charcoal/40">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="flex-1">
+                <p className="truncate font-sans text-sm text-charcoal/70">
+                  {file.name}
+                </p>
+                <input
+                  type="text"
+                  value={captions[i] ?? ""}
+                  placeholder="Caption (optional)"
+                  onChange={(e) => setCaption(i, e.target.value)}
+                  className="mt-2 w-full border-0 border-b hairline bg-transparent pb-2 font-sans text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-gold"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => removeAt(i)}
+                className="mt-3 font-sans text-[13px] uppercase tracking-wider2 text-charcoal/40 transition-colors duration-300 hover:text-charcoal"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </FieldShell>
+  );
+}
+
 export function FileDropField({
   label,
   hint,

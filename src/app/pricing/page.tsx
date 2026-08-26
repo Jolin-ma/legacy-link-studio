@@ -2,24 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { DISPLAY_ADDON_PRICE, HEIRLOOM_SEPARATE_PRICE, TIER_DETAILS } from "@/lib/intake-labels";
 
 export const metadata: Metadata = { title: "Pricing — Legacy Link Studio" };
 
 const tiers = [
   {
     name: "Spark",
-    price: "$59",
-    copy: "An animated photo slideshow set to music, with light AI generation to bring stills to life. Delivered digitally, as generated, ready to share the same week.",
+    price: `$${TIER_DETAILS.spark.price}`,
+    format: "Self-serve photo booth",
+    copy: "Upload 3–4 of your favorite photos and each one is brought to life with subtle AI motion, delivered as a small gallery — fully automated, no manual curation. There's no milestone requirement here: it fits a couple three months in just as well as a couple three years in.",
+    turnaround: "Delivers as soon as it's ready — no reveal-lock option, and no revisions.",
+    displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },
   {
     name: "Forever",
-    price: "$149",
-    copy: "A full cinematic mini-film blending your own footage with AI-recreated scenes for the moments you don't have on camera, with optional narration and a locked-reveal link that unlocks on your chosen date. Includes one round of revisions — swap a scene, adjust the tone or pacing, or change the music — so the film comes back exactly right before it's sealed.",
+    price: `$${TIER_DETAILS.forever.price}`,
+    format: "Commissioned film",
+    copy: "A full cinematic 60–90 sec mini-film blending your own footage with AI-recreated scenes for the moments you don't have on camera, with optional narration and a locked-reveal link that unlocks on your chosen date. One round of revisions included — swap a scene, adjust the tone or pacing, or change the music — before it's sealed.",
+    turnaround: "Produced and delivered on your chosen reveal date.",
+    displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },
   {
     name: "Heirloom",
-    price: "$219",
-    copy: "Everything in Forever, including the revision round, plus a printed keepsake card with a QR code to your capsule, and a small photo book — shipped to your door.",
+    price: `$${TIER_DETAILS.heirloom.price}`,
+    format: "Commissioned film",
+    copy: "Everything in Forever, including the revision round, plus the Display device — a small LCD device loaded with your film — included, not an add-on.",
+    turnaround: "Produced and delivered on your chosen reveal date.",
+    displayLine: `Display device included — $${HEIRLOOM_SEPARATE_PRICE - TIER_DETAILS.heirloom.price} less than buying Forever + Display separately.`,
   },
 ];
 
@@ -35,29 +45,43 @@ export default function PricingPage() {
           <h1 className="mt-6 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
             Three ways to keep your story.
           </h1>
+          <p className="mt-6 max-w-2xl font-sans text-[15px] leading-relaxed text-charcoal/70">
+            Spark is a categorically different thing from Forever and
+            Heirloom — a self-serve photo booth, not a smaller version of the
+            commissioned film. Choose the one that fits where you are.
+          </p>
 
           <div className="mt-20 grid gap-16 border-t hairline pt-16 md:grid-cols-3">
             {tiers.map((tier) => (
               <div key={tier.name}>
-                <h2 className="font-display text-2xl">{tier.name}</h2>
+                <p className="font-sans text-[13px] uppercase tracking-wider2 text-charcoal/50">
+                  {tier.format}
+                </p>
+                <h2 className="mt-2 font-display text-2xl">{tier.name}</h2>
                 <p className="mt-2 font-display text-3xl text-gold">{tier.price}</p>
                 <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
                   {tier.copy}
+                </p>
+                <p className="mt-5 font-sans text-[13px] italic text-charcoal/50">
+                  {tier.turnaround}
+                </p>
+                <p className="mt-3 font-sans text-[13px] text-gold">
+                  {tier.displayLine}
                 </p>
               </div>
             ))}
           </div>
 
           <p className="mt-20 max-w-2xl border-t hairline pt-8 font-sans text-sm leading-relaxed text-charcoal/60">
-            Most films are delivered within 7–10 days. Every tier includes the
-            locked-reveal mechanic — your capsule stays sealed until the date
-            you choose, then remains yours to revisit forever.
+            Spark has no reveal-lock — it delivers as soon as it&rsquo;s
+            ready. Forever and Heirloom are produced and can be locked to a
+            chosen date, then remain yours to revisit forever once unlocked.
           </p>
 
           <p className="mt-6 max-w-2xl font-sans text-sm leading-relaxed text-charcoal/60">
             Buying for someone else? Every tier works as a gift — the intake
-            keeps your details separate from the couple&rsquo;s story, and
-            Heirloom&rsquo;s printed card is something you can actually wrap.
+            keeps your details separate from the couple&rsquo;s story, and the
+            Display device is something you can actually wrap.
           </p>
 
           <div className="mt-16 flex flex-col items-start gap-6 sm:flex-row sm:items-center">

@@ -21,6 +21,10 @@ const films = [
     names: "Elena & Jonas",
     caption: "Married thirty years — the film their children surprised them with.",
   },
+  {
+    names: "Ren & Kavi — Spark gallery",
+    caption: "Four photos from a semester together, each one brought to life in minutes.",
+  },
 ];
 
 function SampleFilm({ names, caption }: { names: string; caption: string }) {

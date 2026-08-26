@@ -6,16 +6,24 @@ export const metadata: Metadata = { title: "FAQ — Legacy Link Studio" };
 
 const faqs = [
   {
+    q: "What's the difference between Spark and Forever/Heirloom?",
+    a: "Spark is a self-serve photo booth — upload 3–4 photos and each becomes its own short motion piece, fully automated, no milestone required. Forever and Heirloom are a commissioned narrative film, built from your full story with AI-recreated scenes for the moments you don't have on camera. They're genuinely different products, not just different price points.",
+  },
+  {
     q: "How much footage do I need to provide?",
-    a: "Five or more photos is a good starting point — the more you share, the more of your real story we can use. Anything you don't have, we recreate.",
+    a: "For Spark, exactly 3–4 photos. For Forever and Heirloom, five or more photos is a good starting point — the more you share, the more of your real story we can use. Anything you don't have, we recreate.",
   },
   {
     q: "How long is the finished film?",
-    a: "Every film runs 60–90 seconds — long enough to actually tell the story, short enough to watch again and again.",
+    a: "Forever and Heirloom films run 60–90 seconds — long enough to actually tell the story, short enough to watch again and again. Spark delivers a small gallery of individual motion photos rather than a single film.",
   },
   {
     q: "How long does it take?",
-    a: "Most films are delivered within 7–10 days of completing your intake and checkout.",
+    a: "Spark is instant once it's generated — realistically 24–48 hours while the pipeline is still maturing. Forever and Heirloom are produced and typically delivered within 7–10 days of completing your intake and checkout.",
+  },
+  {
+    q: "What is the Display device?",
+    a: "A small LCD device loaded with your gallery or film and shipped to you. It's a $59 add-on on Spark and Forever, and included on Heirloom. It ships separately from your digital delivery — adding it never delays your gallery or film.",
   },
   {
     q: "Can I buy this as a gift for someone else?",
@@ -31,7 +39,7 @@ const faqs = [
   },
   {
     q: "When will they find out about it?",
-    a: "You choose: notify them the moment the film is ready, or keep it a surprise until exactly the reveal date.",
+    a: "You choose: notify them the moment the film is ready, or keep it a surprise until exactly the reveal date. Spark has no reveal-lock — it's delivered as soon as it's ready.",
   },
   {
     q: "Do they need to do anything to receive it?",
@@ -39,11 +47,11 @@ const faqs = [
   },
   {
     q: "Who can see the capsule?",
-    a: "Only people with the link. There's no login — the link itself, along with an optional PIN on the Heirloom tier, is the credential.",
+    a: "Only people with the link. There's no login — the link itself is the credential.",
   },
   {
     q: "Can we change the reveal date?",
-    a: "Yes — there's a self-serve control right on your order status page, or reach out and we'll update it for you before the original date arrives.",
+    a: "For Forever and Heirloom, yes — there's a self-serve control right on your order status page, or reach out and we'll update it for you before the original date arrives. Spark has no reveal date to change.",
   },
   {
     q: "What's your refund policy?",

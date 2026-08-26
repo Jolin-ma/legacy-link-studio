@@ -8,7 +8,7 @@ const sections: LegalSection[] = [
     heading: "1. What we collect",
     paragraphs: [
       "To build your film, we collect what you enter during the intake flow: names, relationship dates, written answers about your story, the tone and music preferences you choose, and the photos, video clips, and voice notes you upload.",
-      "To fulfill and deliver an order, we collect an email address for your receipt, recipient email address(es) for the reveal link, a reveal date and unlock preference, and — for Heirloom orders — a shipping address. If you're placing an order as a gift, we collect your name and email separately from the couple's details.",
+      "To fulfill and deliver an order, we collect an email address for your receipt, recipient email address(es) for the reveal link, and — for Forever and Heirloom orders — a reveal date and unlock preference. If you add the Display device (or order Heirloom, which includes it), we also collect a shipping address. If you're placing an order as a gift, we collect your name and email separately from the couple's details.",
       "We don't collect full payment card numbers ourselves; those are handled directly by our payment processor.",
     ],
   },
@@ -21,7 +21,7 @@ const sections: LegalSection[] = [
   {
     heading: "3. How we share it",
     paragraphs: [
-      "We share the minimum necessary information with a small number of third parties who help us operate: a payment processor to handle checkout, AI video-generation infrastructure to produce your film, and — for Heirloom orders — a shipping carrier to deliver the physical keepsake. We don't sell personal information to anyone.",
+      "We share the minimum necessary information with a small number of third parties who help us operate: a payment processor to handle checkout, AI video-generation infrastructure to produce your gallery or film, and — for orders with the Display device — a shipping carrier to deliver it. We don't sell personal information to anyone.",
     ],
   },
   {
@@ -31,9 +31,9 @@ const sections: LegalSection[] = [
     ],
   },
   {
-    heading: "5. Access, PINs, and reveal tokens",
+    heading: "5. Access and reveal tokens",
     paragraphs: [
-      "Your capsule link is a long, unguessable identifier rather than a login — it is the credential. Heirloom orders add a 4-digit PIN as a second factor. Treat both as you would any private link or password: whoever holds them can view the capsule once it unlocks.",
+      "Your capsule link is a long, unguessable identifier rather than a login — it is the credential. Treat it as you would any private link or password: whoever holds it can view the capsule once it unlocks.",
     ],
   },
   {

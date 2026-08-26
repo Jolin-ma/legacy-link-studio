@@ -2,40 +2,41 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FilmPanel } from "@/components/film-panel";
+import { TIER_DETAILS } from "@/lib/intake-labels";
 
 const steps = [
   {
     n: "01",
-    title: "Tell us your story",
-    copy: "A short guided intake — how you met, the moments that mattered, the photos and clips you already have.",
+    title: "Choose your path",
+    copy: "A self-serve photo booth, or a fuller guided intake for a commissioned film — how you met, the moments that mattered, the photos and clips you already have.",
   },
   {
     n: "02",
     title: "We bring it to life",
-    copy: "Your footage is woven with cinematic AI-recreated scenes, scored and paced like a real short film.",
+    copy: "Your photos come alive with AI motion, or your footage is woven with cinematic AI-recreated scenes, scored and paced like a real short film.",
   },
   {
     n: "03",
     title: "It unlocks when you choose",
-    copy: "Delivered as a private capsule that stays locked until the date you set — a wedding day, an anniversary, a proposal.",
+    copy: "Spark delivers instantly. Forever and Heirloom arrive as a private capsule that stays locked until the date you set — a wedding day, an anniversary, a proposal.",
   },
 ];
 
 const pricingTeaser = [
   {
     name: "Spark",
-    price: "$59",
-    line: "An animated photo film with music, delivered digitally.",
+    price: `$${TIER_DETAILS.spark.price}`,
+    line: "Upload 3–4 photos, each brought to life with AI motion — no milestone required, delivered instantly.",
   },
   {
     name: "Forever",
-    price: "$149",
+    price: `$${TIER_DETAILS.forever.price}`,
     line: "A full cinematic mini-film with AI-recreated scenes and a locked reveal.",
   },
   {
     name: "Heirloom",
-    price: "$219",
-    line: "Everything in Forever, plus a printed keepsake card shipped to your door.",
+    price: `$${TIER_DETAILS.heirloom.price}`,
+    line: "Everything in Forever, plus the Display device included.",
   },
 ];
 

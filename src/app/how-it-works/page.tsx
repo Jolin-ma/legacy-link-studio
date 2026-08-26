@@ -15,7 +15,33 @@ interface Step {
   note?: { q: string; a: string };
 }
 
-const steps: Step[] = [
+const sparkSteps: Step[] = [
+  {
+    n: "01",
+    title: "Upload your photos",
+    copy: "Choose 3–4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
+    note: {
+      q: "How much footage do I need to provide?",
+      a: "Exactly 3–4 photos, whatever ones you love most.",
+    },
+  },
+  {
+    n: "02",
+    title: "We bring them to life",
+    copy: "Each photo becomes its own short looping motion piece — the same emotional hook behind photo-animation tools used over 10 million times.",
+  },
+  {
+    n: "03",
+    title: "Delivered",
+    copy: "Fully automated, no manual curation on our end, no reveal-lock — your gallery is ready as soon as it's generated.",
+    note: {
+      q: "How long does it take?",
+      a: "Instant is the target once the pipeline is fully automated. Realistically, budget 24–48 hours today.",
+    },
+  },
+];
+
+const filmSteps: Step[] = [
   {
     n: "01",
     title: "Tell your story",
@@ -27,29 +53,85 @@ const steps: Step[] = [
   },
   {
     n: "02",
-    title: "Choose your style",
-    copy: "Romantic and soft, playful and fun, cinematic and dramatic, or documentary and candid — the tone you choose shapes everything that follows, from pacing to score.",
-  },
-  {
-    n: "03",
     title: "We craft your film",
-    copy: "Your own photos and clips are woven together with cinematic AI-recreated scenes for the moments you don't have on camera, scored and paced like a real short film — most run 60 to 90 seconds, long enough to tell it, short enough to watch again and again.",
+    copy: "Your own photos and clips are woven together with cinematic AI-recreated scenes for the moments you don't have on camera, scored and paced like a real short film — most run 60 to 90 seconds.",
     note: {
       q: "How long does it take?",
       a: "Most films are delivered within 7–10 days of completing your intake and checkout.",
     },
   },
   {
-    n: "04",
+    n: "03",
     title: "Set your reveal moment",
     copy: "Choose the date it unlocks — a wedding day, an anniversary, a proposal — and whether it plays the instant that date arrives, or waits for the two of you to open it together.",
   },
   {
-    n: "05",
+    n: "04",
     title: "Your capsule unlocks",
     copy: "Delivered as a private link only you hold, with no login required. Once it unlocks, it stays yours permanently — a keepsake you can return to for as long as you're telling this story.",
   },
 ];
+
+function StepRow({ step, i }: { step: Step; i: number }) {
+  return (
+    <div
+      className={`flex flex-col gap-10 md:items-center md:gap-16 ${
+        i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+      }`}
+    >
+      <div className="md:w-1/2">
+        <span className="font-display text-base italic text-gold">{step.n}</span>
+        <h3 className="mt-4 font-display text-3xl md:text-4xl">{step.title}</h3>
+        <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
+          {step.copy}
+        </p>
+        {step.note ? (
+          <div className="mt-8 border-t hairline pt-6">
+            <p className="font-display text-lg italic">{step.note.q}</p>
+            <p className="mt-2 font-sans text-sm leading-relaxed text-charcoal/60">
+              {step.note.a}
+            </p>
+          </div>
+        ) : null}
+      </div>
+      <div className="md:w-1/2">
+        <div className="aspect-[4/3] w-full" style={{ backgroundImage: STILL_GRADIENT }} />
+      </div>
+    </div>
+  );
+}
+
+function Track({
+  eyebrow,
+  title,
+  intro,
+  steps,
+}: {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  steps: Step[];
+}) {
+  return (
+    <div>
+      <div className="max-w-2xl">
+        <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          {eyebrow}
+        </p>
+        <h2 className="mt-4 font-display text-3xl md:text-4xl">{title}</h2>
+        <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
+          {intro}
+        </p>
+      </div>
+
+      <div className="mt-16 space-y-24 border-t hairline pt-16 md:space-y-32 md:pt-24">
+        {steps.map((step, i) => (
+          <StepRow key={step.n} step={step} i={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function HowItWorksPage() {
   return (
@@ -61,53 +143,28 @@ export default function HowItWorksPage() {
             How It Works
           </p>
           <h1 className="mt-6 font-display text-4xl leading-tight md:text-6xl">
-            From your story to a film you&rsquo;ll watch forever.
+            Two ways to keep your story.
           </h1>
           <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
-            Five steps, from the first question we ask to the moment your
-            story unlocks.
+            Spark is a self-serve photo booth. Forever and Heirloom are a
+            commissioned film. They&rsquo;re genuinely different mechanics,
+            not just different price points — pick the track that fits.
           </p>
         </div>
 
-        <div className="mx-auto max-w-6xl px-6 pb-28 md:px-10 md:pb-36">
-          <div className="space-y-24 border-t hairline pt-24 md:space-y-32 md:pt-32">
-            {steps.map((step, i) => (
-              <div
-                key={step.n}
-                className={`flex flex-col gap-10 md:items-center md:gap-16 ${
-                  i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                }`}
-              >
-                <div className="md:w-1/2">
-                  <span className="font-display text-base italic text-gold">
-                    {step.n}
-                  </span>
-                  <h2 className="mt-4 font-display text-3xl md:text-4xl">
-                    {step.title}
-                  </h2>
-                  <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
-                    {step.copy}
-                  </p>
-                  {step.note ? (
-                    <div className="mt-8 border-t hairline pt-6">
-                      <p className="font-display text-lg italic">
-                        {step.note.q}
-                      </p>
-                      <p className="mt-2 font-sans text-sm leading-relaxed text-charcoal/60">
-                        {step.note.a}
-                      </p>
-                    </div>
-                  ) : null}
-                </div>
-                <div className="md:w-1/2">
-                  <div
-                    className="aspect-[4/3] w-full"
-                    style={{ backgroundImage: STILL_GRADIENT }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto max-w-6xl space-y-32 px-6 pb-28 md:px-10 md:pb-36">
+          <Track
+            eyebrow="Spark"
+            title="Upload your photos → We bring them to life → Delivered"
+            intro="No milestone needed, no manual curation, no waiting on a date. Three steps, fully automated."
+            steps={sparkSteps}
+          />
+          <Track
+            eyebrow="Forever & Heirloom"
+            title="Tell your story → We craft your film → Set your reveal moment → Your capsule unlocks"
+            intro="A commissioned narrative film, built around the milestone you're celebrating — a wedding, an anniversary, a proposal."
+            steps={filmSteps}
+          />
         </div>
 
         <section className="border-t hairline bg-bone">

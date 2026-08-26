@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { emptyIntakeData, type IntakeData } from "./types";
@@ -11,6 +11,8 @@ import { StepStory } from "./steps/step-story";
 import { StepFootage } from "./steps/step-footage";
 import { StepReveal } from "./steps/step-reveal";
 import { StepPackage } from "./steps/step-package";
+import { StepSparkPhotos } from "./steps/step-spark-photos";
+import { StepSparkDelivery } from "./steps/step-spark-delivery";
 import { buildOrderDraft, saveOrderDraft } from "@/lib/order-draft";
 
 type UpdateFn = <K extends keyof IntakeData>(key: K, value: IntakeData[K]) => void;
@@ -25,6 +27,37 @@ const giverStep: StepDef = {
   label: "About You",
   isValid: (d) => d.giverName.trim() !== "" && d.giverEmail.trim() !== "",
   render: (data, update) => <StepGiver data={data} update={update} />,
+};
+
+const packageStep: StepDef = {
+  label: "Choose Your Package",
+  isValid: (d) => d.tier !== "",
+  render: (data, update) => <StepPackage data={data} update={update} />,
+};
+
+const sparkPhotosStep: StepDef = {
+  label: "Your Photos",
+  isValid: (d) => d.sparkPhotos.length >= 3 && d.sparkPhotos.length <= 4,
+  render: (data, update) => <StepSparkPhotos data={data} update={update} />,
+};
+
+const sparkDeliveryStep: StepDef = {
+  label: "Delivery & Review",
+  isValid: (d) => {
+    if (d.recipientEmails.trim() === "") return false;
+    if (d.displayAddon) {
+      const a = d.shippingAddress;
+      return (
+        a.line1.trim() !== "" &&
+        a.city.trim() !== "" &&
+        a.state.trim() !== "" &&
+        a.postalCode.trim() !== "" &&
+        a.country.trim() !== ""
+      );
+    }
+    return true;
+  },
+  render: (data, update) => <StepSparkDelivery data={data} update={update} />,
 };
 
 const coupleStep: StepDef = {
@@ -54,20 +87,17 @@ const footageStep: StepDef = {
 };
 
 const revealStep: StepDef = {
-  label: "The Reveal",
-  isValid: (d) =>
-    d.revealDate !== "" &&
-    d.revealMode !== "" &&
-    d.recipientEmails.trim() !== "" &&
-    (d.giverName.trim() === "" || d.notifyMode !== ""),
-  render: (data, update) => <StepReveal data={data} update={update} />,
-};
-
-const packageStep: StepDef = {
-  label: "Package & Review",
+  label: "The Reveal & Review",
   isValid: (d) => {
-    if (d.tier === "") return false;
-    if (d.tier === "heirloom") {
+    if (
+      d.revealDate === "" ||
+      d.revealMode === "" ||
+      d.recipientEmails.trim() === "" ||
+      (d.giverName.trim() !== "" && d.notifyMode === "")
+    ) {
+      return false;
+    }
+    if (d.tier === "heirloom" || d.displayAddon) {
       const a = d.shippingAddress;
       return (
         a.line1.trim() !== "" &&
@@ -79,28 +109,35 @@ const packageStep: StepDef = {
     }
     return true;
   },
-  render: (data, update) => <StepPackage data={data} update={update} />,
+  render: (data, update) => <StepReveal data={data} update={update} />,
 };
 
-function buildSteps(mode: "self" | "gift"): StepDef[] {
-  const base = [coupleStep, storyStep, footageStep, revealStep, packageStep];
-  return mode === "gift" ? [giverStep, ...base] : base;
+function buildSteps(mode: "self" | "gift", tier: IntakeData["tier"]): StepDef[] {
+  const lead = mode === "gift" ? [giverStep] : [];
+  const tail =
+    tier === "spark"
+      ? [sparkPhotosStep, sparkDeliveryStep]
+      : tier === "forever" || tier === "heirloom"
+      ? [coupleStep, storyStep, footageStep, revealStep]
+      : [];
+  return [...lead, packageStep, ...tail];
 }
 
 export function IntakeFlow({ mode = "self" }: { mode?: "self" | "gift" }) {
   const router = useRouter();
-  const [steps] = useState(() => buildSteps(mode));
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [data, setData] = useState<IntakeData>(emptyIntakeData);
+
+  const steps = useMemo(() => buildSteps(mode, data.tier), [mode, data.tier]);
 
   const update: UpdateFn = (key, value) =>
     setData((prev) => ({ ...prev, [key]: value }));
 
   const totalSteps = steps.length;
-  const currentStep = steps[step];
+  const currentStep = steps[Math.min(step, totalSteps - 1)];
   const valid = currentStep.isValid(data);
-  const isLastStep = step === totalSteps - 1;
+  const isLastStep = step >= totalSteps - 1;
 
   const goNext = () => {
     if (!valid) return;
@@ -120,7 +157,11 @@ export function IntakeFlow({ mode = "self" }: { mode?: "self" | "gift" }) {
 
   return (
     <div className="pb-32">
-      <ProgressLine current={step} total={totalSteps} label={currentStep.label} />
+      <ProgressLine
+        current={Math.min(step, totalSteps - 1)}
+        total={totalSteps}
+        label={currentStep.label}
+      />
 
       <div className="mx-auto mt-14 max-w-2xl overflow-hidden px-6 md:px-0">
         <AnimatePresence initial={false} custom={direction}>
