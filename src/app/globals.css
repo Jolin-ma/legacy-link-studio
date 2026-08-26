@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #fbf8f3;
+    color: #231f1c;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #ad8a56;
+    color: #fbf8f3;
+  }
+}
+
+@layer utilities {
+  .hairline {
+    border-color: rgba(35, 31, 28, 0.12);
+  }
+
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+}
