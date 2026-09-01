@@ -29,7 +29,7 @@ export function CapsuleLink({ token }: { token: string }) {
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <a
           href={path}
-          className="font-display text-lg text-gold underline decoration-gold/30 underline-offset-4 transition-colors hover:text-charcoal"
+          className="font-display text-lg text-forest underline decoration-forest/30 underline-offset-4 transition-colors hover:text-charcoal"
         >
           {path}
         </a>

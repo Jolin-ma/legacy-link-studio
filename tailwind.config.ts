@@ -5,14 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bone: "#F6F1E9",
-        ivory: "#FBF8F3",
-        charcoal: "#231F1C",
-        espresso: "#2E2620",
-        gold: {
-          DEFAULT: "#AD8A56",
-          light: "#C7A876",
-          dark: "#8C6F41",
+        bone: "#F1EBE0",
+        ivory: "#F9F5F1",
+        charcoal: "#301F00",
+        espresso: "#2A211A",
+        grey: "#898D8F",
+        forest: {
+          DEFAULT: "#2A4B22",
+          light: "#CEF5CA",
+          deep: "#1B3316",
         },
       },
       fontFamily: {

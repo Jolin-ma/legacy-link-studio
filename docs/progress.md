@@ -7,7 +7,7 @@ Status snapshot of the build against `legacy-link-site-spec.md` and `legacy-link
 ## Stack
 
 - **Framework:** Next.js 15 (App Router, TypeScript), deployed as a static/SSR hybrid
-- **Styling:** Tailwind CSS, restrained ivory/charcoal/gold palette, Fraunces (display serif) + Inter (sans), via `next/font/google`
+- **Styling:** Tailwind CSS, restrained ivory/charcoal palette with a single forest-green accent, green pill buttons, 20px-radius image blocks, frosted-glass cards on gradient bands, Fraunces (display serif, bold-word emphasis) + Inter (sans), via `next/font/google` — see `DESIGN.md`
 - **Motion:** Framer Motion — crossfade + vertical-drift transitions on the intake flow, whileInView fades on marketing sections
 - **Data:** No backend yet — see "Architecture" below
 
@@ -17,19 +17,17 @@ Status snapshot of the build against `legacy-link-site-spec.md` and `legacy-link
 
 | Route | Status | Notes |
 |---|---|---|
-| `/` Home | ✅ Built | Full-bleed hero, 3-beat teaser, second film moment, social proof, pricing teaser, footer CTA |
-| `/how-it-works` | ✅ Built | 5-step alternating asymmetric layout; footage/turnaround FAQs answered inline |
-| `/examples` | ✅ Built | 3 full-bleed sample-film placeholders (Maya & Theo, Priya & Sam, Elena & Jonas), one-line captions |
-| `/pricing` | ✅ Built | Spark/Forever/Heirloom tiers; gift note + "start the gift flow instead" link |
-| `/start` | ✅ Built | 5-step self-mode intake flow |
-| `/gift` | ✅ Built | 6-step gift-mode intake flow (adds "About You" giver step, reframed copy, notify-timing choice) |
-| `/checkout` | ✅ Built | Order summary + payment form (demo — no real payment processed); prefills receipt email for gift orders |
-| `/order/[id]/confirmation` | ✅ Built | Shows capsule link + PIN (Heirloom); gift-aware copy |
-| `/order/[id]/status` | ✅ Built | Reveal-date self-service editor + demo "mark as ready" control (stands in for a real production pipeline) |
-| `/capsule/[token]` | ✅ Built | Full reveal state machine — pre-production, countdown, reveal-button, auto-unlock, unlocked/permanent, PIN gate, invalid-token fallback |
-| `/about` | ✅ Built | Founder narrative + craft/portfolio note |
-| `/faq` | ✅ Built | Practical + gift-flow questions |
-| `/legal/terms`, `/legal/privacy` | ✅ Built | Full terms/privacy content, tailored to the reveal mechanic, gift flow, and Heirloom shipping; opens with a brief honest note on the portfolio-project context |
+| `/` Home | ✅ Rebuilt | Editorial rebuild on the new tokens (forest-green accent, Fraunces bold-emphasis headlines, 20px-radius image blocks, green pill CTAs): full-bleed hero, split "studio" statement, forest film panel, rose-gradient reveal band w/ preview card, packages ledger, 3 image-card beats, proof quotes, closing CTA + dual image. |
+| `/how-it-works` | ✅ Migrated | 5-step alternating layout; green accent, pill CTA, 20px-radius stills, bold-word titles |
+| `/examples` | ✅ Rebuilt | News/gallery treatment: oversized centred title, featured story + 3-up rounded image cards (format eyebrow + serif caption), giant closing wordmark. Content stays fictional-sample — no press logos. |
+| `/pricing` | ✅ Migrated | Ledger tiers, green prices/eyebrows/pill, bold-word title |
+| `/start` `/gift` | ✅ Migrated | Intake: green progress bar, green radio/checkbox fills, green focus underline, green pill "Continue" |
+| `/checkout` | ✅ Migrated | Green eyebrows/price, green pill "Complete Payment" (full-width, green disabled state) |
+| `/order/[id]/confirmation` `/order/[id]/status` | ✅ Migrated | Green eyebrows, outline-pill demo controls, green focus on date input |
+| `/capsule/[token]` | ✅ Migrated | forest-light "unlocks in" line, ivory-outline pill unlock button; Spark gallery chrome left minimal per prior note |
+| `/about` | ✅ Rebuilt | "Join us" treatment: oversized centred title, rose-gradient band with frosted-glass problem cards, bold thesis line, full-bleed still, "how we work" principle grid, narrative + quote, giant wordmark |
+| `/faq` | ✅ Migrated | Green eyebrow, bold-word title, serif question weight |
+| `/legal/terms`, `/legal/privacy` | ✅ Migrated | Green eyebrow, bold-word title (via `LegalDocument`) |
 
 Legend: ✅ built and verified in-browser · 🟡 placeholder/stub · ⬜ not started
 

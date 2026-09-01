@@ -45,10 +45,10 @@ export function OrderStatusClient({ id }: { id: string }) {
   if (!order) {
     return (
       <div className="mx-auto max-w-xl px-6 py-32 text-center md:px-10">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+        <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
           Order #{id}
         </p>
-        <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
+        <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
           We couldn&rsquo;t find this order.
         </h1>
         <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
@@ -68,10 +68,10 @@ export function OrderStatusClient({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-xl px-6 py-32 md:px-10">
       <div className="text-center">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+        <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
           Order #{id}
         </p>
-        <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
+        <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
           {statusLine}
         </h1>
         {!isSpark && order.status === "in_production" ? (
@@ -119,7 +119,7 @@ export function OrderStatusClient({ id }: { id: string }) {
                   const updated = advanceDisplayFulfillment(order.id);
                   if (updated) setOrder(updated);
                 }}
-                className="mt-4 border border-charcoal/40 px-6 py-3 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+                className="mt-4 rounded-full border border-charcoal/40 px-6 py-3 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
               >
                 Advance display fulfillment
               </button>
@@ -142,7 +142,7 @@ export function OrderStatusClient({ id }: { id: string }) {
                 type="date"
                 value={revealDateInput}
                 onChange={(e) => setRevealDateInput(e.target.value)}
-                className="border-0 border-b hairline bg-transparent pb-2 font-display text-xl text-charcoal focus:outline-none focus:border-gold"
+                className="border-0 border-b hairline bg-transparent pb-2 font-display text-xl text-charcoal focus:outline-none focus:border-forest"
               />
               <button
                 type="button"
@@ -169,7 +169,7 @@ export function OrderStatusClient({ id }: { id: string }) {
               <button
                 type="button"
                 onClick={() => setOrder(markOrderReady(order.id))}
-                className="mt-4 border border-charcoal/40 px-6 py-3 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+                className="mt-4 rounded-full border border-charcoal/40 px-6 py-3 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
               >
                 Mark as ready for delivery
               </button>

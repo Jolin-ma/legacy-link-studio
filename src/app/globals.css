@@ -8,24 +8,75 @@
   }
 
   body {
-    background-color: #fbf8f3;
-    color: #231f1c;
+    background-color: #f9f5f1;
+    color: #301f00;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: #ad8a56;
-    color: #fbf8f3;
+    background-color: #2a4b22;
+    color: #f9f5f1;
   }
 }
 
 @layer utilities {
   .hairline {
-    border-color: rgba(35, 31, 28, 0.12);
+    border-color: rgba(48, 31, 0, 0.14);
+  }
+
+  .hairline-dark {
+    border-color: rgba(249, 245, 241, 0.18);
   }
 
   .full-bleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
+  }
+
+  /* Warm radial grade used behind image placeholders pending real film stills. */
+  .grade-warm {
+    background-image: radial-gradient(
+      120% 90% at 20% 20%,
+      #6b4a2e 0%,
+      #3a2a1e 45%,
+      #1c130d 100%
+    );
+  }
+
+  .grade-forest {
+    background-image: radial-gradient(
+      120% 100% at 25% 15%,
+      #3f6b34 0%,
+      #24421d 50%,
+      #10200c 100%
+    );
+  }
+
+  .grade-rose {
+    background-image: linear-gradient(
+      135deg,
+      #e8a58c 0%,
+      #d98bb0 42%,
+      #b68ecb 100%
+    );
+  }
+
+  .grade-dark {
+    background-image: radial-gradient(
+      120% 90% at 30% 25%,
+      #2f2620 0%,
+      #1c1712 55%,
+      #100c09 100%
+    );
+  }
+
+  /* Hero — a muted cinematic wash with a faint iridescence, pending a real still. */
+  .grade-hero {
+    background-color: #17120d;
+    background-image:
+      radial-gradient(90% 70% at 78% 12%, rgba(173, 138, 86, 0.5) 0%, rgba(173, 138, 86, 0) 55%),
+      radial-gradient(80% 80% at 12% 30%, rgba(42, 75, 34, 0.55) 0%, rgba(42, 75, 34, 0) 60%),
+      radial-gradient(70% 90% at 55% 100%, rgba(182, 142, 203, 0.28) 0%, rgba(182, 142, 203, 0) 60%),
+      linear-gradient(180deg, #241b12 0%, #161009 100%);
   }
 }

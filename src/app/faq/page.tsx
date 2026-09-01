@@ -65,17 +65,17 @@ export default function FaqPage() {
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-2xl px-6 py-28 md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             FAQ
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
-            Practical questions.
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
+            Practical <span className="font-bold">questions</span>.
           </h1>
 
           <div className="mt-16 divide-y hairline border-t hairline">
             {faqs.map((item) => (
               <div key={item.q} className="py-8">
-                <h2 className="font-display text-xl">{item.q}</h2>
+                <h2 className="font-display text-xl font-normal">{item.q}</h2>
                 <p className="mt-3 font-sans text-[15px] leading-relaxed text-charcoal/70">
                   {item.a}
                 </p>

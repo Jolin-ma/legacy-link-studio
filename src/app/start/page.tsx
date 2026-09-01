@@ -17,7 +17,7 @@ export default function StartPage() {
           Giving this to someone else?{" "}
           <Link
             href="/gift"
-            className="text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-gold"
+            className="text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-forest"
           >
             Start the gift flow instead
           </Link>

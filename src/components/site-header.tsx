@@ -35,7 +35,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
           ))}
           <Link
             href="/start"
-            className="border border-current/40 px-5 py-2 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-current"
+            className="rounded-full border border-current/40 px-5 py-2 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-current"
           >
             Begin Your Story
           </Link>

@@ -85,8 +85,8 @@ export default function TermsPage() {
     <LegalDocument
       eyebrow="Legal"
       title="Terms of Service"
-      updated="August 25, 2026"
-      intro="Legacy Link Studio is a portfolio project built to demonstrate a complete product experience end to end — but these terms are written the way they would read for a real, operating business, since that's the point of the exercise."
+      updated="September 1, 2026"
+      intro="These terms govern your use of Legacy Link Studio. We've written them to be read rather than skimmed — plain language, nothing important buried in the fine print."
       sections={sections}
     />
   );

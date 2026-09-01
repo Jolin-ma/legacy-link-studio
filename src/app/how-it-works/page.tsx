@@ -5,9 +5,6 @@ import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = { title: "How It Works — Legacy Link Studio" };
 
-const STILL_GRADIENT =
-  "radial-gradient(120% 90% at 20% 20%, #3a2f26 0%, #241d18 55%, #14100d 100%)";
-
 interface Step {
   n: string;
   title: string;
@@ -80,8 +77,8 @@ function StepRow({ step, i }: { step: Step; i: number }) {
       }`}
     >
       <div className="md:w-1/2">
-        <span className="font-display text-base italic text-gold">{step.n}</span>
-        <h3 className="mt-4 font-display text-3xl md:text-4xl">{step.title}</h3>
+        <span className="font-display text-base italic text-forest">{step.n}</span>
+        <h3 className="mt-4 font-display text-3xl font-normal md:text-4xl">{step.title}</h3>
         <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
           {step.copy}
         </p>
@@ -95,7 +92,7 @@ function StepRow({ step, i }: { step: Step; i: number }) {
         ) : null}
       </div>
       <div className="md:w-1/2">
-        <div className="aspect-[4/3] w-full" style={{ backgroundImage: STILL_GRADIENT }} />
+        <div className="grade-warm aspect-[4/3] w-full rounded-[20px]" />
       </div>
     </div>
   );
@@ -115,10 +112,10 @@ function Track({
   return (
     <div>
       <div className="max-w-2xl">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+        <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
           {eyebrow}
         </p>
-        <h2 className="mt-4 font-display text-3xl md:text-4xl">{title}</h2>
+        <h2 className="mt-4 font-display text-3xl font-normal md:text-4xl">{title}</h2>
         <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
           {intro}
         </p>
@@ -139,11 +136,11 @@ export default function HowItWorksPage() {
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-3xl px-6 py-28 text-center md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             How It Works
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-6xl">
-            Two ways to keep your story.
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-6xl">
+            Two ways to <span className="font-bold">keep your story</span>.
           </h1>
           <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
             Spark is a self-serve photo booth. Forever and Heirloom are a
@@ -169,12 +166,12 @@ export default function HowItWorksPage() {
 
         <section className="border-t hairline bg-bone">
           <div className="mx-auto max-w-7xl px-6 py-28 text-center md:px-10 md:py-36">
-            <h2 className="font-display text-3xl leading-snug md:text-5xl">
-              Ready to tell your story?
+            <h2 className="font-display text-3xl font-normal leading-snug md:text-5xl">
+              Ready to <span className="font-bold">tell your story</span>?
             </h2>
             <Link
               href="/start"
-              className="mt-10 inline-block border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+              className="mt-10 inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
             >
               Begin Your Story
             </Link>

@@ -73,8 +73,8 @@ export default function PrivacyPage() {
     <LegalDocument
       eyebrow="Legal"
       title="Privacy Policy"
-      updated="August 25, 2026"
-      intro="Legacy Link Studio is a portfolio project built to demonstrate a complete product experience end to end — but this policy is written the way it would read for a real, operating business, since that's the point of the exercise."
+      updated="September 1, 2026"
+      intro="This policy explains what we collect, why, and what you can ask us to do with it. We've kept it in plain language, because a privacy policy you can't read isn't much of a promise."
       sections={sections}
     />
   );

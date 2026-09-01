@@ -15,7 +15,7 @@ export default function GiftPage() {
           Buying this for yourself?{" "}
           <Link
             href="/start"
-            className="text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-gold"
+            className="text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-forest"
           >
             Start here instead
           </Link>

@@ -191,7 +191,7 @@ export function IntakeFlow({ mode = "self" }: { mode?: "self" | "gift" }) {
             type="button"
             onClick={goNext}
             disabled={!valid}
-            className="border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory disabled:cursor-not-allowed disabled:border-charcoal/15 disabled:text-charcoal/30 disabled:hover:bg-transparent disabled:hover:text-charcoal/30"
+            className="rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep disabled:cursor-not-allowed disabled:bg-forest/25 disabled:text-ivory/50 disabled:hover:bg-forest/25"
           >
             {isLastStep ? "Continue to checkout" : "Continue"}
           </button>

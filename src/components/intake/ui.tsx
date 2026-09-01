@@ -17,7 +17,7 @@ export function FieldShell({
     <label className="block">
       <span className="font-sans text-[13px] uppercase tracking-wider2 text-charcoal/60">
         {label}
-        {required ? <span className="text-gold"> *</span> : null}
+        {required ? <span className="text-forest"> *</span> : null}
       </span>
       {hint ? (
         <span className="mt-1 block font-sans text-[13px] italic text-charcoal/40">
@@ -30,7 +30,7 @@ export function FieldShell({
 }
 
 const inputBase =
-  "w-full border-0 border-b hairline bg-transparent pb-3 font-display text-2xl md:text-3xl text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-gold transition-colors duration-300";
+  "w-full border-0 border-b hairline bg-transparent pb-3 font-display text-2xl md:text-3xl text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-forest transition-colors duration-300";
 
 export function TextField({
   value,
@@ -71,7 +71,7 @@ export function TextAreaField({
       placeholder={placeholder}
       rows={rows}
       onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
-      className="w-full resize-none border-0 border-b hairline bg-transparent pb-3 font-sans text-lg leading-relaxed text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-gold transition-colors duration-300"
+      className="w-full resize-none border-0 border-b hairline bg-transparent pb-3 font-sans text-lg leading-relaxed text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-forest transition-colors duration-300"
     />
   );
 }
@@ -91,7 +91,7 @@ export function SelectField({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={`${inputBase} appearance-none cursor-pointer bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23AD8A56%22 stroke-width=%221.5%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-[length:20px] bg-[right_0.25rem_center] bg-no-repeat pr-8`}
+      className={`${inputBase} appearance-none cursor-pointer bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232A4B22%22 stroke-width=%221.5%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-[length:20px] bg-[right_0.25rem_center] bg-no-repeat pr-8`}
     >
       <option value="" disabled>
         {placeholder}
@@ -124,13 +124,13 @@ export function RadioGroup({
             key={opt.value}
             onClick={() => onChange(opt.value)}
             className={`block w-full border-b hairline pb-4 pt-1 text-left transition-colors duration-300 ${
-              active ? "border-gold" : ""
+              active ? "border-forest" : ""
             }`}
           >
             <span className="flex items-center gap-3">
               <span
                 className={`h-2.5 w-2.5 rounded-full border transition-colors duration-300 ${
-                  active ? "border-gold bg-gold" : "border-charcoal/30"
+                  active ? "border-forest bg-forest" : "border-charcoal/30"
                 }`}
               />
               <span className="font-display text-xl text-charcoal">
@@ -168,7 +168,7 @@ export function CheckboxField({
     >
       <span
         className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center border transition-colors duration-300 ${
-          checked ? "border-gold bg-gold" : "border-charcoal/30"
+          checked ? "border-forest bg-forest" : "border-charcoal/30"
         }`}
       >
         {checked ? (
@@ -223,7 +223,7 @@ export function CaptionedPhotosField({
   return (
     <FieldShell label={label} hint={hint}>
       {files.length < max ? (
-        <label className="flex cursor-pointer flex-col items-start border-b hairline pb-6 pt-2 transition-colors duration-300 hover:border-gold">
+        <label className="flex cursor-pointer flex-col items-start border-b hairline pb-6 pt-2 transition-colors duration-300 hover:border-forest">
           <input
             type="file"
             accept="image/*"
@@ -231,7 +231,7 @@ export function CaptionedPhotosField({
             className="sr-only"
             onChange={(e) => handleFiles(Array.from(e.target.files ?? []))}
           />
-          <span className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <span className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             {files.length > 0 ? "Add more" : "Choose photos"}
           </span>
           <span className="mt-2 font-sans text-sm text-charcoal/60">
@@ -258,7 +258,7 @@ export function CaptionedPhotosField({
                   value={captions[i] ?? ""}
                   placeholder="Caption (optional)"
                   onChange={(e) => setCaption(i, e.target.value)}
-                  className="mt-2 w-full border-0 border-b hairline bg-transparent pb-2 font-sans text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-gold"
+                  className="mt-2 w-full border-0 border-b hairline bg-transparent pb-2 font-sans text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-forest"
                 />
               </div>
               <button
@@ -293,7 +293,7 @@ export function FileDropField({
 }) {
   return (
     <FieldShell label={label} hint={hint}>
-      <label className="flex cursor-pointer flex-col items-start border-b hairline pb-6 pt-2 transition-colors duration-300 hover:border-gold">
+      <label className="flex cursor-pointer flex-col items-start border-b hairline pb-6 pt-2 transition-colors duration-300 hover:border-forest">
         <input
           type="file"
           accept={accept}
@@ -301,7 +301,7 @@ export function FileDropField({
           className="sr-only"
           onChange={(e) => onChange(Array.from(e.target.files ?? []))}
         />
-        <span className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+        <span className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
           {files.length > 0 ? "Add more" : "Choose files"}
         </span>
         <span className="mt-2 font-sans text-sm text-charcoal/60">
