@@ -24,10 +24,10 @@ export function LegalDocument({
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-2xl px-6 py-28 md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             {eyebrow}
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
             {title}
           </h1>
           <p className="mt-4 font-sans text-sm text-charcoal/50">
@@ -41,7 +41,7 @@ export function LegalDocument({
           <div className="mt-4">
             {sections.map((section) => (
               <div key={section.heading} className="border-t hairline py-10">
-                <h2 className="font-display text-2xl">{section.heading}</h2>
+                <h2 className="font-display text-2xl font-normal">{section.heading}</h2>
                 <div className="mt-4 space-y-4">
                   {section.paragraphs.map((p, i) => (
                     <p

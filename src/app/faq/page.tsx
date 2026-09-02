@@ -7,11 +7,11 @@ export const metadata: Metadata = { title: "FAQ — Legacy Link Studio" };
 const faqs = [
   {
     q: "What's the difference between Spark and Forever/Heirloom?",
-    a: "Spark is a self-serve photo booth — upload 3–4 photos and each becomes its own short motion piece, fully automated, no milestone required. Forever and Heirloom are a commissioned narrative film, built from your full story with AI-recreated scenes for the moments you don't have on camera. They're genuinely different products, not just different price points.",
+    a: "Spark is a self-serve photo booth — upload 4 photos and each becomes its own short motion piece, fully automated, no milestone required. Forever and Heirloom are a commissioned narrative film, built from your full story with AI-recreated scenes for the moments you don't have on camera. They're genuinely different products, not just different price points.",
   },
   {
     q: "How much footage do I need to provide?",
-    a: "For Spark, exactly 3–4 photos. For Forever and Heirloom, five or more photos is a good starting point — the more you share, the more of your real story we can use. Anything you don't have, we recreate.",
+    a: "For Spark, exactly 4 photos. For Forever and Heirloom, five or more photos is a good starting point — the more you share, the more of your real story we can use. Anything you don't have, we recreate.",
   },
   {
     q: "How long is the finished film?",
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "How long does it take?",
-    a: "Spark is instant once it's generated — realistically 24–48 hours while the pipeline is still maturing. Forever and Heirloom are produced and typically delivered within 7–10 days of completing your intake and checkout.",
+    a: "Spark is instant once it's generated — realistically within 24 hours while the pipeline is still maturing. Forever and Heirloom are produced and typically delivered within 7–10 days of completing your intake and checkout.",
   },
   {
     q: "What is the Display device?",
@@ -65,17 +65,17 @@ export default function FaqPage() {
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-2xl px-6 py-28 md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             FAQ
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
-            Practical questions.
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
+            Practical <span className="font-bold">questions</span>.
           </h1>
 
           <div className="mt-16 divide-y hairline border-t hairline">
             {faqs.map((item) => (
               <div key={item.q} className="py-8">
-                <h2 className="font-display text-xl">{item.q}</h2>
+                <h2 className="font-display text-xl font-normal">{item.q}</h2>
                 <p className="mt-3 font-sans text-[15px] leading-relaxed text-charcoal/70">
                   {item.a}
                 </p>

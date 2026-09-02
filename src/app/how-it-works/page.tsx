@@ -2,27 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import {
+  HowItWorksStep,
+  type HowItWorksStepData,
+} from "@/components/how-it-works-step";
 
 export const metadata: Metadata = { title: "How It Works — Legacy Link Studio" };
 
-const STILL_GRADIENT =
-  "radial-gradient(120% 90% at 20% 20%, #3a2f26 0%, #241d18 55%, #14100d 100%)";
-
-interface Step {
-  n: string;
-  title: string;
-  copy: string;
-  note?: { q: string; a: string };
-}
+type Step = HowItWorksStepData;
 
 const sparkSteps: Step[] = [
   {
     n: "01",
     title: "Upload your photos",
-    copy: "Choose 3–4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
+    copy: "Choose 4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
     note: {
       q: "How much footage do I need to provide?",
-      a: "Exactly 3–4 photos, whatever ones you love most.",
+      a: "Exactly 4 photos, whatever ones you love most.",
     },
   },
   {
@@ -36,7 +32,7 @@ const sparkSteps: Step[] = [
     copy: "Fully automated, no manual curation on our end, no reveal-lock — your gallery is ready as soon as it's generated.",
     note: {
       q: "How long does it take?",
-      a: "Instant is the target once the pipeline is fully automated. Realistically, budget 24–48 hours today.",
+      a: "Instant is the target once the pipeline is fully automated. Today, expect your gallery within 24 hours.",
     },
   },
 ];
@@ -72,64 +68,39 @@ const filmSteps: Step[] = [
   },
 ];
 
-function StepRow({ step, i }: { step: Step; i: number }) {
-  return (
-    <div
-      className={`flex flex-col gap-10 md:items-center md:gap-16 ${
-        i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-      }`}
-    >
-      <div className="md:w-1/2">
-        <span className="font-display text-base italic text-gold">{step.n}</span>
-        <h3 className="mt-4 font-display text-3xl md:text-4xl">{step.title}</h3>
-        <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
-          {step.copy}
-        </p>
-        {step.note ? (
-          <div className="mt-8 border-t hairline pt-6">
-            <p className="font-display text-lg italic">{step.note.q}</p>
-            <p className="mt-2 font-sans text-sm leading-relaxed text-charcoal/60">
-              {step.note.a}
-            </p>
-          </div>
-        ) : null}
-      </div>
-      <div className="md:w-1/2">
-        <div className="aspect-[4/3] w-full" style={{ backgroundImage: STILL_GRADIENT }} />
-      </div>
-    </div>
-  );
-}
-
 function Track({
   eyebrow,
   title,
   intro,
   steps,
+  grade,
 }: {
   eyebrow: string;
   title: string;
   intro: string;
   steps: Step[];
+  grade: "warm" | "forest";
 }) {
   return (
-    <div>
-      <div className="max-w-2xl">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
-          {eyebrow}
-        </p>
-        <h2 className="mt-4 font-display text-3xl md:text-4xl">{title}</h2>
-        <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
-          {intro}
-        </p>
+    <section>
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="max-w-2xl">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
+            {eyebrow}
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-normal md:text-4xl">{title}</h2>
+          <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
+            {intro}
+          </p>
+        </div>
       </div>
 
-      <div className="mt-16 space-y-24 border-t hairline pt-16 md:space-y-32 md:pt-24">
+      <div className="mt-14 md:mt-20">
         {steps.map((step, i) => (
-          <StepRow key={step.n} step={step} i={i} />
+          <HowItWorksStep key={step.n} step={step} index={i} grade={grade} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -139,11 +110,11 @@ export default function HowItWorksPage() {
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-3xl px-6 py-28 text-center md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             How It Works
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-6xl">
-            Two ways to keep your story.
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-6xl">
+            Two ways to <span className="font-bold">keep your story</span>.
           </h1>
           <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
             Spark is a self-serve photo booth. Forever and Heirloom are a
@@ -152,29 +123,31 @@ export default function HowItWorksPage() {
           </p>
         </div>
 
-        <div className="mx-auto max-w-6xl space-y-32 px-6 pb-28 md:px-10 md:pb-36">
+        <div className="space-y-28 pb-28 md:space-y-36 md:pb-36">
           <Track
             eyebrow="Spark"
             title="Upload your photos → We bring them to life → Delivered"
             intro="No milestone needed, no manual curation, no waiting on a date. Three steps, fully automated."
             steps={sparkSteps}
+            grade="warm"
           />
           <Track
             eyebrow="Forever & Heirloom"
             title="Tell your story → We craft your film → Set your reveal moment → Your capsule unlocks"
             intro="A commissioned narrative film, built around the milestone you're celebrating — a wedding, an anniversary, a proposal."
             steps={filmSteps}
+            grade="forest"
           />
         </div>
 
         <section className="border-t hairline bg-bone">
           <div className="mx-auto max-w-7xl px-6 py-28 text-center md:px-10 md:py-36">
-            <h2 className="font-display text-3xl leading-snug md:text-5xl">
-              Ready to tell your story?
+            <h2 className="font-display text-3xl font-normal leading-snug md:text-5xl">
+              Ready to <span className="font-bold">tell your story</span>?
             </h2>
             <Link
               href="/start"
-              className="mt-10 inline-block border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+              className="mt-10 inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
             >
               Begin Your Story
             </Link>

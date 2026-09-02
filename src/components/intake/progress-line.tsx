@@ -23,7 +23,7 @@ export function ProgressLine({
       </div>
       <div className="mt-4 h-px w-full bg-charcoal/10">
         <motion.div
-          className="h-px bg-gold"
+          className="h-px bg-forest"
           initial={false}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.7, ease: [0.45, 0, 0.15, 1] }}

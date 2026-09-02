@@ -11,7 +11,7 @@ const tiers = [
     name: "Spark",
     price: `$${TIER_DETAILS.spark.price}`,
     format: "Self-serve photo booth",
-    copy: "Upload 3–4 of your favorite photos and each one is brought to life with subtle AI motion, delivered as a small gallery — fully automated, no manual curation. There's no milestone requirement here: it fits a couple three months in just as well as a couple three years in.",
+    copy: "Upload 4 of your favorite photos and each one is brought to life with subtle AI motion, delivered as a small gallery — fully automated, no manual curation. There's no milestone requirement here: it fits a couple three months in just as well as a couple three years in.",
     turnaround: "Delivers as soon as it's ready — no reveal-lock option, and no revisions.",
     displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },
@@ -39,11 +39,11 @@ export default function PricingPage() {
       <SiteHeader />
       <main className="bg-ivory">
         <div className="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-36">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             Packages
           </p>
-          <h1 className="mt-6 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
-            Three ways to keep your story.
+          <h1 className="mt-6 max-w-2xl font-display text-4xl font-normal leading-[1.08] md:text-5xl">
+            Three ways to <span className="font-bold">keep your story</span>.
           </h1>
           <p className="mt-6 max-w-2xl font-sans text-[15px] leading-relaxed text-charcoal/70">
             Spark is a categorically different thing from Forever and
@@ -57,15 +57,15 @@ export default function PricingPage() {
                 <p className="font-sans text-[13px] uppercase tracking-wider2 text-charcoal/50">
                   {tier.format}
                 </p>
-                <h2 className="mt-2 font-display text-2xl">{tier.name}</h2>
-                <p className="mt-2 font-display text-3xl text-gold">{tier.price}</p>
+                <h2 className="mt-2 font-display text-2xl font-normal">{tier.name}</h2>
+                <p className="mt-2 font-display text-3xl text-forest">{tier.price}</p>
                 <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
                   {tier.copy}
                 </p>
                 <p className="mt-5 font-sans text-[13px] italic text-charcoal/50">
                   {tier.turnaround}
                 </p>
-                <p className="mt-3 font-sans text-[13px] text-gold">
+                <p className="mt-3 font-sans text-[13px] text-forest">
                   {tier.displayLine}
                 </p>
               </div>
@@ -87,13 +87,13 @@ export default function PricingPage() {
           <div className="mt-16 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
             <Link
               href="/start"
-              className="inline-block border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+              className="inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
             >
               Begin Your Story
             </Link>
             <Link
               href="/gift"
-              className="font-sans text-sm text-charcoal/50 underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-gold"
+              className="font-sans text-sm text-charcoal/50 underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-forest"
             >
               Or start the gift flow instead
             </Link>

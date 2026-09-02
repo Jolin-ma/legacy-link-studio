@@ -59,14 +59,14 @@ function OrderSummary({ draft }: { draft: OrderDraft }) {
 
   return (
     <div>
-      <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+      <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
         Order Summary
       </p>
 
       {tier ? (
         <div className="mt-6">
-          <h2 className="font-display text-3xl">{tier.label}</h2>
-          <p className="mt-1 font-display text-xl text-gold">${tier.price}</p>
+          <h2 className="font-display text-3xl font-normal">{tier.label}</h2>
+          <p className="mt-1 font-display text-xl text-forest">${tier.price}</p>
         </div>
       ) : null}
 
@@ -183,11 +183,11 @@ export function CheckoutClient() {
     return (
       <div className="flex min-h-[70svh] items-center">
         <div className="mx-auto max-w-xl px-6 py-32 text-center md:px-10">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             Checkout
           </p>
-          <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
-            There&rsquo;s nothing to check out yet.
+          <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
+            There&rsquo;s <span className="font-bold">nothing to check out</span> yet.
           </h1>
           <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
             Start your story and we&rsquo;ll bring you back here once
@@ -195,7 +195,7 @@ export function CheckoutClient() {
           </p>
           <Link
             href="/start"
-            className="mt-10 inline-block border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory"
+            className="mt-10 inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
           >
             Begin Your Story
           </Link>
@@ -208,18 +208,18 @@ export function CheckoutClient() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-36">
-      <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+      <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
         Checkout
       </p>
-      <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
-        Almost there.
+      <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
+        Almost <span className="font-bold">there</span>.
       </h1>
 
       <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
         <OrderSummary draft={draft} />
 
         <div className="md:border-l md:hairline md:pl-16">
-          <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             Payment Details
           </p>
 
@@ -270,7 +270,7 @@ export function CheckoutClient() {
             type="button"
             onClick={handlePay}
             disabled={!paymentValid}
-            className="mt-12 w-full border border-charcoal/40 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory disabled:cursor-not-allowed disabled:border-charcoal/15 disabled:text-charcoal/30 disabled:hover:bg-transparent disabled:hover:text-charcoal/30"
+            className="mt-12 w-full rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep disabled:cursor-not-allowed disabled:bg-forest/25 disabled:text-ivory/50 disabled:hover:bg-forest/25"
           >
             {tier ? `Complete Payment — $${orderTotal(draft)}` : "Complete Payment"}
           </button>

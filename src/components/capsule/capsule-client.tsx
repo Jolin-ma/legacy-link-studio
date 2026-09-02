@@ -160,7 +160,7 @@ export function CapsuleClient({ token }: { token: string }) {
         <p className="font-sans text-[13px] uppercase tracking-wider2 text-ivory/60">
           {names}
         </p>
-        <p className="mt-8 font-display text-2xl italic text-gold-light">
+        <p className="mt-8 font-display text-2xl italic text-forest-light">
           Your story is ready.
         </p>
         <button
@@ -169,7 +169,7 @@ export function CapsuleClient({ token }: { token: string }) {
             const updated = markUnlocked(token);
             if (updated) setOrder(updated);
           }}
-          className="mt-8 border border-ivory/50 px-8 py-4 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-espresso"
+          className="mt-8 rounded-full border border-ivory/45 px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:bg-ivory hover:text-forest-deep"
         >
           Open when you&rsquo;re ready
         </button>
@@ -182,7 +182,7 @@ export function CapsuleClient({ token }: { token: string }) {
       <p className="font-sans text-[13px] uppercase tracking-wider2 text-ivory/60">
         {names}
       </p>
-      <p className="mt-8 font-display text-2xl italic text-gold-light">
+      <p className="mt-8 font-display text-2xl italic text-forest-light">
         Your story unlocks in
       </p>
       {order.revealAt !== null ? <Countdown revealAt={order.revealAt} now={now} /> : null}

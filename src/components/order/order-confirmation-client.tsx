@@ -23,10 +23,10 @@ export function OrderConfirmationClient({ id }: { id: string }) {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-32 text-center md:px-10">
-      <p className="font-sans text-[13px] uppercase tracking-wider2 text-gold">
+      <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
         Order Confirmed
       </p>
-      <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
+      <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
         {isSpark
           ? isGift
             ? "Their gallery is coming to life."

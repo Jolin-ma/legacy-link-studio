@@ -17,7 +17,7 @@ export function StepSparkPhotos({
       <div>
         <p className="font-display text-3xl md:text-4xl">Your Photos</p>
         <p className="mt-3 font-sans text-[15px] text-charcoal/60">
-          Choose 3&ndash;4 of your favorites. Each one gets its own short
+          Choose 4 of your favorites. Each one gets its own short
           looping motion piece &mdash; no milestone required, just the
           moments you want to keep.
         </p>
@@ -25,7 +25,7 @@ export function StepSparkPhotos({
 
       <CaptionedPhotosField
         label="Photos"
-        hint={`Choose 3–4 — up to ${MAX_SPARK_PHOTOS}`}
+        hint={`Choose your ${MAX_SPARK_PHOTOS} favorites`}
         max={MAX_SPARK_PHOTOS}
         files={data.sparkPhotos}
         captions={data.sparkCaptions}
