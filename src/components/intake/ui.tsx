@@ -237,7 +237,7 @@ export function CaptionedPhotosField({
           <span className="mt-2 font-sans text-sm text-charcoal/60">
             {files.length > 0
               ? `${files.length} of ${max} selected`
-              : `Nothing selected yet — choose up to ${max}`}
+              : `Nothing selected yet — choose ${max}`}
           </span>
         </label>
       ) : null}
