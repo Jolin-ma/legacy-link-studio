@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import {
+  HowItWorksStep,
+  type HowItWorksStepData,
+} from "@/components/how-it-works-step";
 
 export const metadata: Metadata = { title: "How It Works — Legacy Link Studio" };
 
-interface Step {
-  n: string;
-  title: string;
-  copy: string;
-  note?: { q: string; a: string };
-}
+type Step = HowItWorksStepData;
 
 const sparkSteps: Step[] = [
   {
@@ -69,64 +68,39 @@ const filmSteps: Step[] = [
   },
 ];
 
-function StepRow({ step, i }: { step: Step; i: number }) {
-  return (
-    <div
-      className={`flex flex-col gap-10 md:items-center md:gap-16 ${
-        i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-      }`}
-    >
-      <div className="md:w-1/2">
-        <span className="font-display text-base italic text-forest">{step.n}</span>
-        <h3 className="mt-4 font-display text-3xl font-normal md:text-4xl">{step.title}</h3>
-        <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/70">
-          {step.copy}
-        </p>
-        {step.note ? (
-          <div className="mt-8 border-t hairline pt-6">
-            <p className="font-display text-lg italic">{step.note.q}</p>
-            <p className="mt-2 font-sans text-sm leading-relaxed text-charcoal/60">
-              {step.note.a}
-            </p>
-          </div>
-        ) : null}
-      </div>
-      <div className="md:w-1/2">
-        <div className="grade-warm aspect-[4/3] w-full rounded-[20px]" />
-      </div>
-    </div>
-  );
-}
-
 function Track({
   eyebrow,
   title,
   intro,
   steps,
+  grade,
 }: {
   eyebrow: string;
   title: string;
   intro: string;
   steps: Step[];
+  grade: "warm" | "forest";
 }) {
   return (
-    <div>
-      <div className="max-w-2xl">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
-          {eyebrow}
-        </p>
-        <h2 className="mt-4 font-display text-3xl font-normal md:text-4xl">{title}</h2>
-        <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
-          {intro}
-        </p>
+    <section>
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="max-w-2xl">
+          <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
+            {eyebrow}
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-normal md:text-4xl">{title}</h2>
+          <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
+            {intro}
+          </p>
+        </div>
       </div>
 
-      <div className="mt-16 space-y-24 border-t hairline pt-16 md:space-y-32 md:pt-24">
+      <div className="mt-14 md:mt-20">
         {steps.map((step, i) => (
-          <StepRow key={step.n} step={step} i={i} />
+          <HowItWorksStep key={step.n} step={step} index={i} grade={grade} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -149,18 +123,20 @@ export default function HowItWorksPage() {
           </p>
         </div>
 
-        <div className="mx-auto max-w-6xl space-y-32 px-6 pb-28 md:px-10 md:pb-36">
+        <div className="space-y-28 pb-28 md:space-y-36 md:pb-36">
           <Track
             eyebrow="Spark"
             title="Upload your photos → We bring them to life → Delivered"
             intro="No milestone needed, no manual curation, no waiting on a date. Three steps, fully automated."
             steps={sparkSteps}
+            grade="warm"
           />
           <Track
             eyebrow="Forever & Heirloom"
             title="Tell your story → We craft your film → Set your reveal moment → Your capsule unlocks"
             intro="A commissioned narrative film, built around the milestone you're celebrating — a wedding, an anniversary, a proposal."
             steps={filmSteps}
+            grade="forest"
           />
         </div>
 

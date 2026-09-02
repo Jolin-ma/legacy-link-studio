@@ -2,36 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { Placeholder } from "@/components/placeholder";
-import { GiantWordmark } from "@/components/giant-wordmark";
+import { FilmPanel } from "@/components/film-panel";
+import { ExamplesGallery, type SampleStory } from "@/components/examples-gallery";
 
 export const metadata: Metadata = { title: "Sample Stories — Legacy Link Studio" };
 
-const featured = {
+const featured: SampleStory = {
   names: "Maya & Theo",
   format: "Forever film · 90 sec",
   caption: "Ten years of long-distance, told in ninety seconds.",
-  tone: "warm" as const,
+  tone: "warm",
 };
 
-const films = [
+const stories: SampleStory[] = [
   {
     names: "Priya & Sam",
     format: "Forever film · 75 sec",
     caption: "A backyard proposal, recreated exactly as he remembers it.",
-    tone: "dark" as const,
+    tone: "dark",
   },
   {
     names: "Elena & Jonas",
     format: "Heirloom film · 90 sec",
     caption: "Married thirty years — the film their children surprised them with.",
-    tone: "forest" as const,
+    tone: "forest",
   },
   {
     names: "Ren & Kavi",
     format: "Spark gallery · 4 motion photos",
     caption: "Four photos from a semester together, each one brought to life in minutes.",
-    tone: "rose" as const,
+    tone: "rose",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function ExamplesPage() {
     <>
       <SiteHeader />
       <main className="bg-ivory">
-        <div className="mx-auto max-w-4xl px-6 pb-16 pt-32 text-center md:px-10 md:pb-24 md:pt-44">
+        <div className="mx-auto max-w-4xl px-6 pb-20 pt-32 text-center md:px-10 md:pb-24 md:pt-40">
           <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
             Sample stories
           </p>
@@ -49,56 +49,32 @@ export default function ExamplesPage() {
             <br />
             <span className="font-bold">already told</span>.
           </h1>
-          <p className="mx-auto mt-8 max-w-xl font-display text-xl leading-relaxed text-charcoal/70 md:text-2xl">
+          <p className="mx-auto mt-8 max-w-xl font-sans text-[15px] leading-relaxed text-charcoal/70">
             Real photos, real voices, and the moments we recreated where the
             camera wasn&rsquo;t there yet. Every sample here is a placeholder
             until the first real films are made.
           </p>
         </div>
 
-        {/* Featured */}
-        <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-            <Placeholder
-              tone={featured.tone}
-              rounded
-              caption={featured.names}
-              className="aspect-[4/3] w-full"
-            />
-            <div>
-              <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
-                {featured.format}
-              </p>
-              <p className="mt-4 font-display text-3xl font-normal leading-[1.1] md:text-4xl">
-                &ldquo;{featured.caption}&rdquo;
-              </p>
-            </div>
+        {/* Featured — full screen */}
+        <FilmPanel minHeight="100svh" gradeClass="grade-warm">
+          <div className="max-w-2xl">
+            <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest-light">
+              {featured.format}
+            </p>
+            <h2 className="mt-6 font-display text-4xl font-normal leading-[1.05] md:text-6xl lg:text-7xl">
+              {featured.names}
+            </h2>
+            <p className="mt-6 font-display text-xl italic leading-relaxed text-ivory/75 md:text-2xl">
+              &ldquo;{featured.caption}&rdquo;
+            </p>
           </div>
-        </section>
+        </FilmPanel>
 
-        {/* Grid */}
-        <section className="mx-auto max-w-7xl px-6 pb-28 md:px-10 md:pb-36">
-          <div className="grid gap-x-10 gap-y-14 md:grid-cols-3">
-            {films.map((film) => (
-              <div key={film.names}>
-                <Placeholder
-                  tone={film.tone}
-                  rounded
-                  caption={film.names}
-                  className="aspect-[4/5] w-full"
-                />
-                <p className="mt-6 font-sans text-[13px] uppercase tracking-wider2 text-forest">
-                  {film.format}
-                </p>
-                <p className="mt-3 font-display text-xl leading-relaxed text-charcoal/80">
-                  &ldquo;{film.caption}&rdquo;
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Supporting stories — one unified, airy treatment */}
+        <ExamplesGallery stories={stories} />
 
-        <section className="border-t hairline bg-bone">
+        <section className="bg-bone">
           <div className="mx-auto max-w-7xl px-6 py-24 text-center md:px-10 md:py-32">
             <h2 className="font-display text-3xl font-normal leading-snug md:text-5xl">
               Your story could be <span className="font-bold">next</span>.
@@ -111,8 +87,6 @@ export default function ExamplesPage() {
             </Link>
           </div>
         </section>
-
-        <GiantWordmark />
       </main>
       <SiteFooter />
     </>

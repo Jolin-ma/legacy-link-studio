@@ -44,12 +44,6 @@ const pricingTeaser = [
   },
 ];
 
-const proof = [
-  { names: "Maya & Theo", quote: "We watched it together the morning of the wedding. Nobody's makeup survived." },
-  { names: "Priya & Sam", quote: "It felt like someone had been quietly filming our whole relationship." },
-  { names: "Elena & Jonas", quote: "Our parents still ask to watch it again." },
-];
-
 export default function HomePage() {
   return (
     <>
@@ -135,9 +129,9 @@ export default function HomePage() {
         </div>
       </FilmPanel>
 
-      {/* The reveal — gradient band + preview */}
-      <section className="full-bleed grade-rose px-6 py-24 md:px-10 md:py-32">
-        <div className="mx-auto max-w-4xl text-center">
+      {/* The reveal — gradient band + full-bleed preview */}
+      <section className="full-bleed grade-rose pt-24 md:pt-32">
+        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
           <h2 className="font-display text-[2rem] font-normal leading-[1.1] text-charcoal md:text-5xl">
             It unlocks <span className="font-bold">when you choose</span>
           </h2>
@@ -146,9 +140,9 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-4xl">
-          <Placeholder tone="dark" rounded className="aspect-video w-full" />
-          <span className="absolute -top-5 right-4 inline-flex items-center gap-2 rounded-full bg-ivory px-5 py-2.5 font-sans text-[13px] uppercase tracking-wider2 text-charcoal md:right-8">
+        <div className="relative mt-14 md:mt-20">
+          <Placeholder tone="dark" className="aspect-video w-full md:aspect-[21/9]" />
+          <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-ivory px-5 py-2.5 font-sans text-[13px] uppercase tracking-wider2 text-charcoal md:right-8 md:top-6">
             <span aria-hidden className="text-[10px]">&#9654;</span>
             Preview
           </span>
@@ -156,8 +150,8 @@ export default function HomePage() {
       </section>
 
       {/* Packages */}
-      <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <section className="pt-24 md:pt-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 md:flex-row md:items-end md:px-10">
           <div>
             <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
               The packages
@@ -174,9 +168,12 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
+        <div className="full-bleed mt-14 border-t hairline md:mt-16 md:grid md:grid-cols-3">
           {pricingTeaser.map((tier) => (
-            <div key={tier.name} className="border-t hairline pt-6">
+            <div
+              key={tier.name}
+              className="border-b hairline px-6 py-14 md:border-b-0 md:border-r md:px-10 md:py-20 md:last:border-r-0 lg:px-14"
+            >
               <h3 className="font-display text-2xl font-normal">{tier.name}</h3>
               <p className="mt-2 font-display text-2xl text-forest">{tier.price}</p>
               <p className="mt-4 font-sans text-[15px] leading-relaxed text-charcoal/70">
@@ -188,46 +185,31 @@ export default function HomePage() {
       </section>
 
       {/* How it works — three beats */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-        <div className="grid gap-10 md:grid-cols-3">
+      <section>
+        <div className="full-bleed border-t hairline md:grid md:grid-cols-3 md:border-b">
           {steps.map((step) => (
-            <div key={step.n}>
+            <div
+              key={step.n}
+              className="border-b hairline pb-14 md:border-b-0 md:border-r md:pb-20 md:last:border-r-0"
+            >
               <Placeholder
                 tone={step.tone}
-                rounded
                 caption={step.n}
-                className="aspect-[4/5] w-full"
+                className="aspect-[5/4] w-full"
               />
-              <h3 className="mt-6 font-display text-2xl font-normal">{step.title}</h3>
-              <p className="mt-3 font-sans text-[15px] leading-relaxed text-charcoal/70">
-                {step.copy}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Proof */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:px-10">
-        <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
-          In their words
-        </p>
-        <div className="mt-10 grid gap-12 border-t hairline pt-12 md:grid-cols-3">
-          {proof.map((p) => (
-            <div key={p.names}>
-              <p className="font-display text-xl italic leading-relaxed text-charcoal/80">
-                &ldquo;{p.quote}&rdquo;
-              </p>
-              <p className="mt-4 font-sans text-[13px] uppercase tracking-wider2 text-charcoal/50">
-                {p.names}
-              </p>
+              <div className="px-6 md:px-10 lg:px-14">
+                <h3 className="mt-8 font-display text-2xl font-normal">{step.title}</h3>
+                <p className="mt-3 font-sans text-[15px] leading-relaxed text-charcoal/70">
+                  {step.copy}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Closing */}
-      <section className="border-t hairline bg-bone">
+      <section className="bg-bone">
         <div className="mx-auto max-w-7xl px-6 py-28 text-center md:px-10 md:py-36">
           <h2 className="font-display text-[2rem] font-normal leading-[1.1] md:text-5xl">
             Your story is already a film.
