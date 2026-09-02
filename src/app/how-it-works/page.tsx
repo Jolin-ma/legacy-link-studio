@@ -15,10 +15,10 @@ const sparkSteps: Step[] = [
   {
     n: "01",
     title: "Upload your photos",
-    copy: "Choose 3–4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
+    copy: "Choose 4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
     note: {
       q: "How much footage do I need to provide?",
-      a: "Exactly 3–4 photos, whatever ones you love most.",
+      a: "Exactly 4 photos, whatever ones you love most.",
     },
   },
   {
@@ -32,7 +32,7 @@ const sparkSteps: Step[] = [
     copy: "Fully automated, no manual curation on our end, no reveal-lock — your gallery is ready as soon as it's generated.",
     note: {
       q: "How long does it take?",
-      a: "Instant is the target once the pipeline is fully automated. Realistically, budget 24–48 hours today.",
+      a: "Instant is the target once the pipeline is fully automated. Today, expect your gallery within 24 hours.",
     },
   },
 ];

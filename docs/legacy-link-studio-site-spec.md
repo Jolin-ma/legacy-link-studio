@@ -77,7 +77,7 @@ See §3 for the full field spec. Package selection comes first and branches ever
 - A simple, calm status page for the period between purchase and delivery ("Your story is being brought to life") — avoid a busy progress-bar/dashboard feel; keep it to one clear status line plus an estimated delivery date. When Display is present, show its own small status line beneath the main one (sourcing/loaded/shipped/delivered) rather than merging the two into one combined progress bar — they're genuinely on different clocks.
 
 ### The Capsule (`/capsule/[token]`) — the reveal page
-This is the most important page in the product experience. Full spec of its logic is in §4. Visually: before unlock, a locked/countdown state with quiet, elegant countdown typography over a still frame from their film; after unlock, the film plays full-bleed with the couple's names and story title. Spark orders render the same page in a **gallery display mode** instead — the 3–4 motion photos presented as an elegant looping set (a slow auto-advancing carousel or a simple grid, each one looping quietly) rather than a single film, since there's no single narrative to play back.
+This is the most important page in the product experience. Full spec of its logic is in §4. Visually: before unlock, a locked/countdown state with quiet, elegant countdown typography over a still frame from their film; after unlock, the film plays full-bleed with the couple's names and story title. Spark orders render the same page in a **gallery display mode** instead — the 4 motion photos presented as an elegant looping set (a slow auto-advancing carousel or a simple grid, each one looping quietly) rather than a single film, since there's no single narrative to play back.
 
 ### Gift (`/gift`)
 - Same intake flow, reframed for a gift-giver: collects the giver's info separately from the couple's story details, and adds a scheduled notification email to the couple.
@@ -104,7 +104,7 @@ This is the most important page in the product experience. Full spec of its logi
 **Step 2A — Your Photos**
 | Field | Type | Required |
 |---|---|---|
-| Upload photos (exactly 3–4) | multi-file upload, capped at 4 | yes |
+| Upload photos (exactly 4) | multi-file upload, capped at 4 | yes |
 | Caption per photo (optional, short) | text, one per photo | optional |
 | Partner name(s) or a short title for the set | text | optional |
 
@@ -116,7 +116,7 @@ This is the most important page in the product experience. Full spec of its logi
 | Shipping address | address fields | conditional — only if Display is added |
 | Review summary before checkout | display only | — |
 
-No reveal-lock option on Spark — it's always delivered as soon as it's ready, full stop. (Honest v1 note: "as soon as it's ready" means near-instant only once the generation pipeline is fully automated; while that's being built, budget 24–48 hrs and set expectations on the order-confirmation copy accordingly rather than promising instant before it's true.) Adding the Display **does not** change this — the gallery link still delivers on the same timeline; only the physical device ships separately and later. Say that explicitly on this step, right next to the checkbox, so nobody reads "add a device" as "wait longer for everything."
+No reveal-lock option on Spark — it's always delivered as soon as it's ready, full stop. (Honest v1 note: "as soon as it's ready" means near-instant only once the generation pipeline is fully automated; while that's being built, budget for delivery within 24 hrs and set expectations on the order-confirmation copy accordingly rather than promising instant before it's true.) Adding the Display **does not** change this — the gallery link still delivers on the same timeline; only the physical device ships separately and later. Say that explicitly on this step, right next to the checkbox, so nobody reads "add a device" as "wait longer for everything."
 
 ### Forever / Heirloom path (commissioned film)
 
@@ -167,7 +167,7 @@ No reveal-lock option on Spark — it's always delivered as soon as it's ready, 
 order {
   id
   tier: "spark" | "forever" | "heirloom"
-  delivery_type: "gallery" | "film"        // spark = gallery (3–4 motion photos), forever/heirloom = film
+  delivery_type: "gallery" | "film"        // spark = gallery (4 motion photos), forever/heirloom = film
   status: intake_complete → in_production → ready → delivered      // DIGITAL leg only
   reveal_token: unguessable slug (e.g. 22-char random string, not sequential/order-id-based)
   reveal_at: timestamp (nullable — null = unlock immediately on delivery; ALWAYS null for Spark, since it has no lock option — the field simply doesn't apply)
@@ -175,7 +175,7 @@ order {
   unlocked_at: timestamp (nullable, set the first time it's actually viewed post-unlock condition)
   recipient_emails: []
   assets: [{ type: "video" | "motion_photo", url: private storage URL, caption: string | null }]
-    // forever/heirloom: a single "video" asset. spark: 3–4 "motion_photo" assets.
+    // forever/heirloom: a single "video" asset. spark: 4 "motion_photo" assets.
   cover_still_url: a single still frame, safe to show pre-unlock
 
   display_addon: boolean                  // true if purchased standalone (spark/forever) or bundled (heirloom always true)
@@ -244,7 +244,7 @@ Spark's `in_production` stage is typically near-instant (an automated generation
 
 ## 8. Next Steps
 
-1. Generate the 1–2 sample love-story videos in Higgsfield, plus a set of 3–4 sample motion photos for Spark (this unlocks real content for Home, Examples, and the capsule cover-still/gallery design).
+1. Generate the 1–2 sample love-story videos in Higgsfield, plus a set of 4 sample motion photos for Spark (this unlocks real content for Home, Examples, and the capsule cover-still/gallery design).
 2. Build the Spark path end-to-end first — package selection, photo upload, automated generation, and the capsule gallery display. It's the smallest fully-working slice of the product, with no manual production step in the way.
 3. Build Home + the Forever/Heirloom story intake next.
 4. Build the capsule reveal page's film mode, since it's the emotional centerpiece and the most portfolio-worthy interaction to show off.

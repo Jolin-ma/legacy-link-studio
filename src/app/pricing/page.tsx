@@ -11,7 +11,7 @@ const tiers = [
     name: "Spark",
     price: `$${TIER_DETAILS.spark.price}`,
     format: "Self-serve photo booth",
-    copy: "Upload 3–4 of your favorite photos and each one is brought to life with subtle AI motion, delivered as a small gallery — fully automated, no manual curation. There's no milestone requirement here: it fits a couple three months in just as well as a couple three years in.",
+    copy: "Upload 4 of your favorite photos and each one is brought to life with subtle AI motion, delivered as a small gallery — fully automated, no manual curation. There's no milestone requirement here: it fits a couple three months in just as well as a couple three years in.",
     turnaround: "Delivers as soon as it's ready — no reveal-lock option, and no revisions.",
     displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },

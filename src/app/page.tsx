@@ -30,7 +30,7 @@ const pricingTeaser = [
   {
     name: "Spark",
     price: `$${TIER_DETAILS.spark.price}`,
-    line: "Upload 3–4 photos, each brought to life with AI motion — no milestone required, delivered instantly.",
+    line: "Upload 4 photos, each brought to life with AI motion — no milestone required, delivered instantly.",
   },
   {
     name: "Forever",

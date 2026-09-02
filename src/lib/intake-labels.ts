@@ -30,7 +30,7 @@ export const TIER_DETAILS: Record<
   spark: {
     label: "Spark",
     price: 59,
-    format: "Self-serve photo booth · 3–4 motion photos",
+    format: "Self-serve photo booth · 4 motion photos",
     description:
       "Upload your favorite photos and watch each one come to life with subtle AI motion — delivered as a small gallery, fully automated, no waiting on a milestone.",
   },
