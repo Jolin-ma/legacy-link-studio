@@ -4,7 +4,6 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FrostedCard } from "@/components/frosted-card";
-import { GiantWordmark } from "@/components/giant-wordmark";
 
 export const metadata: Metadata = { title: "About — Legacy Link Studio" };
 
@@ -172,8 +171,6 @@ export default function AboutPage() {
             </Link>
           </div>
         </section>
-
-        <GiantWordmark />
       </main>
       <SiteFooter />
     </>
