@@ -71,26 +71,26 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* The bold thesis */}
-        <div className="mx-auto max-w-2xl px-6 py-24 text-center md:px-10 md:py-28">
-          <p className="font-display text-2xl leading-relaxed text-charcoal/80 md:text-[2rem] md:leading-snug">
-            This is a <span className="font-bold">feeling</span> problem, a{" "}
-            <span className="font-bold">craft</span> problem, and an{" "}
-            <span className="font-bold">engineering</span> problem, all at once —
-            and it&rsquo;s only worth doing if all three are solved together.
-          </p>
-        </div>
-
-        {/* Full-bleed still */}
-        <div className="full-bleed relative h-[50svh] w-screen md:h-[68svh]">
-          <Image
-            src="/images/about/feeling-problem.jpg"
-            alt="A lamplit desk scattered with printed photos of a couple, a contact sheet, a film camera, a storyboard notebook, and a laptop open to an edit timeline."
-            fill
-            sizes="100vw"
-            className="object-cover object-[50%_65%]"
-          />
-        </div>
+        {/* The bold thesis — text left, still right */}
+        <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
+            <p className="font-display text-2xl leading-relaxed text-charcoal/80 md:text-[2rem] md:leading-snug">
+              This is a <span className="font-bold">feeling</span> problem, a{" "}
+              <span className="font-bold">craft</span> problem, and an{" "}
+              <span className="font-bold">engineering</span> problem, all at once —
+              and it&rsquo;s only worth doing if all three are solved together.
+            </p>
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px]">
+              <Image
+                src="/images/about/feeling-problem.jpg"
+                alt="A lamplit desk scattered with printed photos of a couple, a contact sheet, a film camera, a storyboard notebook, and a laptop open to an edit timeline."
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </section>
 
         {/* How we work */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
