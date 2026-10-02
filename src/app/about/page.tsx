@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { Placeholder } from "@/components/placeholder";
 import { FrostedCard } from "@/components/frosted-card";
 import { GiantWordmark } from "@/components/giant-wordmark";
 
@@ -82,7 +82,15 @@ export default function AboutPage() {
         </div>
 
         {/* Full-bleed still */}
-        <Placeholder tone="warm" className="full-bleed h-[50svh] w-screen md:h-[68svh]" />
+        <div className="full-bleed relative h-[50svh] w-screen md:h-[68svh]">
+          <Image
+            src="/images/about/feeling-problem.jpg"
+            alt="A lamplit desk scattered with printed photos of a couple, a contact sheet, a film camera, a storyboard notebook, and a laptop open to an edit timeline."
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_65%]"
+          />
+        </div>
 
         {/* How we work */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
@@ -94,11 +102,15 @@ export default function AboutPage() {
               <h2 className="mt-4 font-display text-3xl font-normal leading-tight md:text-4xl">
                 Built the way we&rsquo;d want it made for us.
               </h2>
-              <Placeholder
-                tone="forest"
-                rounded
-                className="mt-8 aspect-[4/3] w-full"
-              />
+              <div className="relative mt-8 aspect-[4/5] w-full overflow-hidden rounded-[20px]">
+                <Image
+                  src="/images/about/built-the-way.jpg"
+                  alt="A couple curled up together on a sofa in a dim living room, watching a film on a phone."
+                  fill
+                  sizes="(min-width: 768px) 35vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
