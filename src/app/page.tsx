@@ -1,26 +1,29 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FilmPanel } from "@/components/film-panel";
-import { Placeholder } from "@/components/placeholder";
 import { TIER_DETAILS } from "@/lib/intake-labels";
 
 const steps = [
   {
     n: "01",
-    tone: "warm" as const,
+    image: "/images/choose-your-path.jpg",
+    alt: "Polaroids of a couple fanned out beside a notebook titled “how we met”, film strips, and a hand-drawn storyboard.",
     title: "Choose your path",
     copy: "A self-serve photo booth, or a fuller guided intake for a commissioned film — how you met, the moments that mattered, the footage you already have.",
   },
   {
     n: "02",
-    tone: "dark" as const,
+    image: "/images/we-bring-it-to-life.jpg",
+    alt: "A desk at night with a monitor showing a film edit of a couple on a lakeside dock under string lights.",
     title: "We bring it to life",
     copy: "Your photos come alive with AI motion, or your footage is woven with cinematic AI-recreated scenes — scored and paced like a real short film.",
   },
   {
     n: "03",
-    tone: "forest" as const,
+    image: "/images/it-unlocks-when-you-choose.jpg",
+    alt: "A bride and groom at a candlelit wedding reception, watching something on her phone together.",
     title: "It unlocks when you choose",
     copy: "Spark delivers instantly. Forever and Heirloom arrive as a private capsule that stays locked until the date you set — a wedding, an anniversary, a proposal.",
   },
@@ -47,9 +50,15 @@ const pricingTeaser = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero — full-bleed film still */}
+      {/* Hero — full-bleed film */}
       <FilmPanel
         minHeight="100svh"
+        videoSrc={[
+          { src: "/video/landing-hero.webm", type: "video/webm" },
+          { src: "/video/landing-hero.mp4", type: "video/mp4" },
+        ]}
+        posterSrc="/video/landing-hero-poster.jpg"
+        soundToggle
         gradeClass="grade-hero"
         revealOnScroll={false}
         className="pt-0"
@@ -99,7 +108,15 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <Placeholder tone="warm" className="min-h-[56svh] md:min-h-[80svh]" />
+        <div className="relative min-h-[56svh] md:min-h-[80svh]">
+          <Image
+            src="/images/film-you-never-got-to-make.jpg"
+            alt="Printed photos and polaroids of a couple scattered across a wooden table beside a coffee mug, a phone, and a strip of film."
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
       </section>
 
       {/* Recreated scenes — dark film moment */}
@@ -128,26 +145,6 @@ export default function HomePage() {
           </div>
         </div>
       </FilmPanel>
-
-      {/* The reveal — gradient band + full-bleed preview */}
-      <section className="full-bleed grade-rose pt-24 md:pt-32">
-        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
-          <h2 className="font-display text-[2rem] font-normal leading-[1.1] text-charcoal md:text-5xl">
-            It unlocks <span className="font-bold">when you choose</span>
-          </h2>
-          <p className="mt-4 font-display text-lg italic text-charcoal/70 md:text-xl">
-            A private capsule, locked until the date that matters.
-          </p>
-        </div>
-
-        <div className="relative mt-14 md:mt-20">
-          <Placeholder tone="dark" className="aspect-video w-full md:aspect-[21/9]" />
-          <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-ivory px-5 py-2.5 font-sans text-[13px] uppercase tracking-wider2 text-charcoal md:right-8 md:top-6">
-            <span aria-hidden className="text-[10px]">&#9654;</span>
-            Preview
-          </span>
-        </div>
-      </section>
 
       {/* Packages */}
       <section className="pt-24 md:pt-32">
@@ -192,11 +189,19 @@ export default function HomePage() {
               key={step.n}
               className="border-b hairline pb-14 md:border-b-0 md:border-r md:pb-20 md:last:border-r-0"
             >
-              <Placeholder
-                tone={step.tone}
-                caption={step.n}
-                className="aspect-[5/4] w-full"
-              />
+              <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <Image
+                  src={step.image}
+                  alt={step.alt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/35" />
+                <span className="absolute bottom-5 left-6 font-display text-xl text-ivory md:text-2xl">
+                  {step.n}
+                </span>
+              </div>
               <div className="px-6 md:px-10 lg:px-14">
                 <h3 className="mt-8 font-display text-2xl font-normal">{step.title}</h3>
                 <p className="mt-3 font-sans text-[15px] leading-relaxed text-charcoal/70">
@@ -224,8 +229,24 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid grid-cols-2">
-          <Placeholder tone="warm" className="aspect-[4/3] w-full" />
-          <Placeholder tone="forest" className="aspect-[4/3] w-full" />
+          <div className="relative aspect-[4/5] w-full">
+            <Image
+              src="/images/make-it-one-1.jpg"
+              alt="A couple laughing under an umbrella on a rainy street at dusk, seen from behind."
+              fill
+              sizes="50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/5] w-full">
+            <Image
+              src="/images/make-it-one-2.jpg"
+              alt="The same couple facing the camera under the umbrella, laughing in the rain."
+              fill
+              sizes="50vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

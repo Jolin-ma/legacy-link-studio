@@ -1,7 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import type { ReactNode } from "react";
+
+export interface SpreadImage {
+  src: string;
+  alt: string;
+  /** CSS object-position, for stills whose subject sits off-centre. */
+  position?: string;
+}
 
 /**
  * A full-bleed editorial spread: a bone paper text panel butted against an
@@ -13,11 +21,13 @@ export function SplitSpread({
   index,
   gradeClass,
   imageLabel,
+  image,
   children,
 }: {
   index: number;
   gradeClass: string;
   imageLabel: string;
+  image?: SpreadImage;
   children: ReactNode;
 }) {
   const imageLeft = index % 2 === 1;
@@ -47,6 +57,16 @@ export function SplitSpread({
           imageLeft ? "md:order-1" : "md:order-2"
         }`}
       >
+        {image ? (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+            style={image.position ? { objectPosition: image.position } : undefined}
+          />
+        ) : null}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
         <span className="absolute bottom-6 left-6 font-display text-3xl text-ivory/90 md:bottom-8 md:left-10 md:text-4xl">
           {imageLabel}

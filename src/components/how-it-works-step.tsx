@@ -1,12 +1,13 @@
 "use client";
 
-import { SplitSpread } from "@/components/split-spread";
+import { SplitSpread, type SpreadImage } from "@/components/split-spread";
 
 export interface HowItWorksStepData {
   n: string;
   title: string;
   copy: string;
   note?: { q: string; a: string };
+  image?: SpreadImage;
 }
 
 /**
@@ -27,6 +28,7 @@ export function HowItWorksStep({
       index={index}
       gradeClass={grade === "forest" ? "grade-forest" : "grade-warm"}
       imageLabel={step.n}
+      image={step.image}
     >
       <h3 className="font-display text-3xl font-normal leading-[1.1] md:text-4xl">
         {step.title}

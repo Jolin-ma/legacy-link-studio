@@ -16,12 +16,6 @@ const featured: SampleStory = {
 
 const stories: SampleStory[] = [
   {
-    names: "Priya & Sam",
-    format: "Forever film · 75 sec",
-    caption: "A backyard proposal, recreated exactly as he remembers it.",
-    tone: "dark",
-  },
-  {
     names: "Elena & Jonas",
     format: "Heirloom film · 90 sec",
     caption: "Married thirty years — the film their children surprised them with.",
@@ -57,7 +51,13 @@ export default function ExamplesPage() {
         </div>
 
         {/* Featured — full screen */}
-        <FilmPanel minHeight="100svh" gradeClass="grade-warm">
+        <FilmPanel
+          minHeight="100svh"
+          videoSrc="/video/maya-and-theo.mp4"
+          posterSrc="/video/maya-and-theo-poster.jpg"
+          soundToggle
+          gradeClass="grade-warm"
+        >
           <div className="max-w-2xl">
             <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest-light">
               {featured.format}

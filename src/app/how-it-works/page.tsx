@@ -15,6 +15,10 @@ const sparkSteps: Step[] = [
   {
     n: "01",
     title: "Upload your photos",
+    image: {
+      src: "/images/how-it-works/spark-upload.jpg",
+      alt: "A hand placing the last of four printed photos of a couple in a row on a wooden table.",
+    },
     copy: "Choose 4 of your favorites — no milestone required, no need to be planning a wedding. This works for a couple three months in just as well as a couple three years in.",
     note: {
       q: "How much footage do I need to provide?",
@@ -24,11 +28,19 @@ const sparkSteps: Step[] = [
   {
     n: "02",
     title: "We bring them to life",
+    image: {
+      src: "/images/how-it-works/spark-bring-to-life.jpg",
+      alt: "A phone propped against a mug, playing a moving version of a printed photo lying beside it.",
+    },
     copy: "Each photo becomes its own short looping motion piece — the same emotional hook behind photo-animation tools used over 10 million times.",
   },
   {
     n: "03",
     title: "Delivered",
+    image: {
+      src: "/images/how-it-works/spark-delivered.jpg",
+      alt: "A couple laughing together on a sofa as they watch their gallery on a phone.",
+    },
     copy: "Fully automated, no manual curation on our end, no reveal-lock — your gallery is ready as soon as it's generated.",
     note: {
       q: "How long does it take?",
@@ -41,6 +53,10 @@ const filmSteps: Step[] = [
   {
     n: "01",
     title: "Tell your story",
+    image: {
+      src: "/images/how-it-works/film-tell-your-story.jpg",
+      alt: "A couple talking and laughing at a laptop on their living-room coffee table.",
+    },
     copy: "How you met, the early days, the proposal, a detail only the two of you would know. A guided intake, one question at a time — most couples finish in about fifteen minutes.",
     note: {
       q: "How much footage do I need to provide?",
@@ -50,6 +66,10 @@ const filmSteps: Step[] = [
   {
     n: "02",
     title: "We craft your film",
+    image: {
+      src: "/images/how-it-works/film-craft.jpg",
+      alt: "A lightbox laid out with a storyboard of film stills from a couple's story.",
+    },
     copy: "Your own photos and clips are woven together with cinematic AI-recreated scenes for the moments you don't have on camera, scored and paced like a real short film — most run 60 to 90 seconds.",
     note: {
       q: "How long does it take?",
@@ -59,11 +79,20 @@ const filmSteps: Step[] = [
   {
     n: "03",
     title: "Set your reveal moment",
+    image: {
+      src: "/images/how-it-works/film-set-reveal.jpg",
+      alt: "A couple at the fridge, one marking a date on a paper calendar.",
+    },
     copy: "Choose the date it unlocks — a wedding day, an anniversary, a proposal — and whether it plays the instant that date arrives, or waits for the two of you to open it together.",
   },
   {
     n: "04",
     title: "Your capsule unlocks",
+    image: {
+      src: "/images/how-it-works/film-capsule-unlocks.jpg",
+      alt: "A couple wrapped in a blanket on the sofa, watching their film on the TV.",
+      position: "75% 50%",
+    },
     copy: "Delivered as a private link only you hold, with no login required. Once it unlocks, it stays yours permanently — a keepsake you can return to for as long as you're telling this story.",
   },
 ];
