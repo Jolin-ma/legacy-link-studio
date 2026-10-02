@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FilmPanel } from "@/components/film-panel";
 import { ExamplesGallery, type SampleStory } from "@/components/examples-gallery";
 
 export const metadata: Metadata = { title: "Sample Stories — Legacy Link Studio" };
 
-const featured: SampleStory = {
-  names: "Maya & Theo",
-  format: "Forever film · 90 sec",
-  caption: "Ten years of long-distance, told in ninety seconds.",
-  tone: "warm",
-};
-
 const stories: SampleStory[] = [
+  {
+    names: "Maya & Theo",
+    format: "Forever film · 90 sec",
+    caption: "Ten years of long-distance, told in ninety seconds.",
+    tone: "warm",
+    videoSrc: "/video/maya-and-theo.mp4",
+    posterSrc: "/video/maya-and-theo-poster.jpg",
+  },
   {
     names: "Elena & Jonas",
     format: "Heirloom film · 90 sec",
@@ -26,6 +26,32 @@ const stories: SampleStory[] = [
     format: "Spark gallery · 4 motion photos",
     caption: "Four photos from a semester together, each one brought to life in minutes.",
     tone: "rose",
+    loops: [
+      {
+        still: "/images/ren-and-kavi/1.jpg",
+        video: "/video/ren-and-kavi/1.mp4",
+        caption: "Week 2, the library",
+        alt: "Ren resting her head on Kavi's shoulder as they study at a library table under a green lamp.",
+      },
+      {
+        still: "/images/ren-and-kavi/2.jpg",
+        video: "/video/ren-and-kavi/2.mp4",
+        caption: "Midterms, the late-night diner",
+        alt: "Ren feeding Kavi a fry in a diner booth beside a milkshake, both laughing.",
+      },
+      {
+        still: "/images/ren-and-kavi/3.jpg",
+        video: "/video/ren-and-kavi/3.mp4",
+        caption: "First snow, the quad",
+        alt: "Ren and Kavi laughing mid-snowball-fight on a snowy campus lawn.",
+      },
+      {
+        still: "/images/ren-and-kavi/4.jpg",
+        video: "/video/ren-and-kavi/4.mp4",
+        caption: "Last day, outside her dorm",
+        alt: "Kavi hugging Ren goodbye outside a brick dorm at dusk, a suitcase beside them.",
+      },
+    ],
   },
 ];
 
@@ -50,28 +76,7 @@ export default function ExamplesPage() {
           </p>
         </div>
 
-        {/* Featured — full screen */}
-        <FilmPanel
-          minHeight="100svh"
-          videoSrc="/video/maya-and-theo.mp4"
-          posterSrc="/video/maya-and-theo-poster.jpg"
-          soundToggle
-          gradeClass="grade-warm"
-        >
-          <div className="max-w-2xl">
-            <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest-light">
-              {featured.format}
-            </p>
-            <h2 className="mt-6 font-display text-4xl font-normal leading-[1.05] md:text-6xl lg:text-7xl">
-              {featured.names}
-            </h2>
-            <p className="mt-6 font-display text-xl italic leading-relaxed text-ivory/75 md:text-2xl">
-              &ldquo;{featured.caption}&rdquo;
-            </p>
-          </div>
-        </FilmPanel>
-
-        {/* Supporting stories — one unified, airy treatment */}
+        {/* Every story full screen, separated by ivory gutters */}
         <ExamplesGallery stories={stories} />
 
         <section className="bg-bone">
