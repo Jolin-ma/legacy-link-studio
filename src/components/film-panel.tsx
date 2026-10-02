@@ -16,6 +16,7 @@ export function FilmPanel({
   gradeClass,
   revealOnScroll = true,
   soundToggle = false,
+  containOnMobile = false,
   children,
   className = "",
 }: {
@@ -28,6 +29,8 @@ export function FilmPanel({
   revealOnScroll?: boolean;
   /** Show a sound on/off control. The video still autoplays muted — browsers block autoplay with sound. */
   soundToggle?: boolean;
+  /** Letterbox the whole frame on phones instead of cropping it — for landscape films in a tall panel. */
+  containOnMobile?: boolean;
   children: ReactNode;
   className?: string;
 }) {
@@ -53,7 +56,9 @@ export function FilmPanel({
         {videoSrc ? (
           <video
             ref={videoRef}
-            className="h-full w-full object-cover"
+            className={`h-full w-full ${containOnMobile
+                ? "object-contain object-[center_30%] md:object-cover md:object-center"
+                : "object-cover"}`}
             src={typeof videoSrc === "string" ? videoSrc : undefined}
             poster={posterSrc}
             autoPlay

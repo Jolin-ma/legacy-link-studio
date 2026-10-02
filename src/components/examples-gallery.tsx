@@ -10,6 +10,7 @@ export interface SampleStory {
   tone: Tone;
   videoSrc?: string;
   posterSrc?: string;
+  comingSoon?: boolean;
   /** Spark stories show their motion photos as a still-to-motion grid instead of a full-screen panel. */
   loops?: SparkLoop[];
 }
@@ -31,7 +32,7 @@ export function ExamplesGallery({ stories }: { stories: SampleStory[] }) {
     <div className="space-y-16 pb-16 md:space-y-24 md:pb-24">
       {stories.map((story) =>
         story.loops ? (
-          <section key={story.names} className="mx-auto max-w-4xl px-6 md:px-10">
+          <section key={story.names} className="mx-auto max-w-7xl px-6 md:px-10">
             <div className="max-w-2xl">
               <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
                 {story.format}
@@ -54,9 +55,15 @@ export function ExamplesGallery({ stories }: { stories: SampleStory[] }) {
             videoSrc={story.videoSrc}
             posterSrc={story.posterSrc}
             soundToggle={Boolean(story.videoSrc)}
+            containOnMobile
             gradeClass={toneGrade[story.tone]}
           >
             <div className="max-w-2xl">
+              {story.comingSoon ? (
+                <p className="mb-6 inline-flex rounded-full border border-ivory/40 px-4 py-1.5 font-sans text-[12px] uppercase tracking-wider2 text-ivory/90">
+                  Coming soon
+                </p>
+              ) : null}
               <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest-light">
                 {story.format}
               </p>
