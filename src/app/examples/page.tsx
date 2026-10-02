@@ -10,7 +10,7 @@ const stories: SampleStory[] = [
   {
     names: "Maya & Theo",
     format: "Forever film · 90 sec",
-    caption: "Ten years of long-distance, told in ninety seconds.",
+    caption: "Years of long distance, told in ninety seconds.",
     tone: "warm",
     videoSrc: "/video/maya-and-theo.mp4",
     posterSrc: "/video/maya-and-theo-poster.jpg",
@@ -20,6 +20,7 @@ const stories: SampleStory[] = [
     format: "Heirloom film · 90 sec",
     caption: "Married thirty years — the film their children surprised them with.",
     tone: "forest",
+    comingSoon: true,
   },
   {
     names: "Ren & Kavi",

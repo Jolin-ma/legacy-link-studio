@@ -81,7 +81,7 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
   }, []);
 
   return (
-    <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-x-3 md:gap-y-10 md:overflow-visible md:px-0 md:pb-0">
+    <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0 md:pb-0">
       {loops.map((loop, i) => (
         <figure key={loop.video} className="w-[82%] shrink-0 snap-center md:w-auto">
           <div
@@ -98,7 +98,7 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
               src={loop.still}
               alt={loop.alt}
               fill
-              sizes="(min-width: 768px) 448px, 82vw"
+              sizes="(min-width: 768px) 25vw, 82vw"
               className="object-cover"
             />
             {started[i] ? (
