@@ -10,25 +10,40 @@ export interface SparkLoop {
   alt: string;
 }
 
+/** How long the plain photos hold before the first tile starts moving. */
+const HOLD_MS = 2000;
 const STAGGER_MS = 500;
 
 /**
- * A mini demo of Spark: each tile opens on the plain photo, then fades into
- * its motion loop once scrolled into view — tiles that arrive together come
- * alive half a second apart. Loops load lazily, pause off-screen, and stay
- * still for visitors who prefer reduced motion.
+ * A mini demo of Spark: each tile opens on the plain photo, holds for a beat
+ * once scrolled into view, then fades into its motion loop — tiles that arrive
+ * together come alive half a second apart. Hovering a tile with a mouse skips
+ * the wait. Loops load lazily, pause off-screen, and stay still for visitors
+ * who prefer reduced motion.
  */
 export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
   const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [started, setStarted] = useState<boolean[]>(() => loops.map(() => false));
   const [playing, setPlaying] = useState<boolean[]>(() => loops.map(() => false));
+  const reducedMotion = useRef(true);
+  const timers = useRef(new Map<number, number>());
+  /** Tiles already started or scheduled — shared by scroll and hover. */
+  const begun = useRef(new Set<number>());
+
+  const startTile = (i: number) => {
+    begun.current.add(i);
+    window.clearTimeout(timers.current.get(i));
+    timers.current.delete(i);
+    setStarted((s) => (s[i] ? s : s.map((v, j) => (j === i ? true : v))));
+  };
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion.current) return;
 
-    const begun = new Set<number>();
-    const timers: number[] = [];
+    const pending = timers.current;
+    const seen = begun.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,7 +53,7 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
           const video = videoRefs.current[i];
           if (!entry.isIntersecting) {
             video?.pause();
-          } else if (begun.has(i)) {
+          } else if (seen.has(i)) {
             void video?.play().catch(() => {});
           } else {
             arriving.push(i);
@@ -47,11 +62,10 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
         arriving
           .sort((a, b) => a - b)
           .forEach((i, n) => {
-            begun.add(i);
-            timers.push(
-              window.setTimeout(() => {
-                setStarted((s) => s.map((v, j) => (j === i ? true : v)));
-              }, n * STAGGER_MS),
+            seen.add(i);
+            pending.set(
+              i,
+              window.setTimeout(() => startTile(i), HOLD_MS + n * STAGGER_MS),
             );
           });
       },
@@ -61,7 +75,8 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
     tileRefs.current.forEach((el) => el && observer.observe(el));
     return () => {
       observer.disconnect();
-      timers.forEach(clearTimeout);
+      pending.forEach((t) => window.clearTimeout(t));
+      pending.clear();
     };
   }, []);
 
@@ -74,6 +89,9 @@ export function SparkLoops({ loops }: { loops: SparkLoop[] }) {
               tileRefs.current[i] = el;
             }}
             data-index={i}
+            onPointerEnter={(e) => {
+              if (e.pointerType === "mouse" && !reducedMotion.current) startTile(i);
+            }}
             className="relative aspect-[4/5] overflow-hidden bg-espresso"
           >
             <Image
