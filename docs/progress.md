@@ -49,7 +49,8 @@ This is why "no real payment," "no real email," and "no real production pipeline
 
 - **No real video/photo assets.** Every "film" is a warm gradient placeholder (`film-panel.tsx` and equivalents). Swapping in real Higgsfield output is a matter of passing `videoSrc`/`posterSrc` props — no layout changes needed.
 - **No real payment processing.** Checkout is a styled mock with an explicit on-page disclosure. Stripe integration would replace `handlePay` in `checkout-client.tsx`.
-- **No real email sending.** Recipients/couples never get an automatic email; the capsule link is surfaced to the buyer/giver directly, with copy that's honest about needing to share it themselves. Spec §4.4 (ready/scheduled notification emails) and §4.5 (early-access email verification, resend-link flow) are unbuilt.
+- **Orders reach the studio via Formspree.** On "Complete Payment", `src/lib/submit-order.ts` posts the full order (story answers, reveal settings, shipping — never card fields) to the Formspree form "Legacy Link Studio Orders", which emails it and keeps an archive. Photo/video/voice files are **not** sent — only counts; real uploads need storage (e.g. Vercel Blob).
+- **No customer-facing email.** Recipients/couples never get an automatic email; the capsule link is surfaced to the buyer/giver directly, with copy that's honest about needing to share it themselves. Spec §4.4 (ready/scheduled notification emails) and §4.5 (early-access email verification, resend-link flow) are unbuilt.
 - **No real production pipeline.** Orders start `in_production`; the order status page has a clearly-labeled demo control to flip an order to `ready` for testing, since there's nothing to actually wait on yet.
 
 ---

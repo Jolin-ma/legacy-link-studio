@@ -10,7 +10,15 @@ export type OrderDraft = Pick<
   | "partner2Name"
   | "milestone"
   | "milestoneOther"
+  | "relationshipStart"
+  | "howMet"
+  | "earlyDays"
+  | "proposalMoment"
+  | "secretDetail"
   | "tone"
+  | "musicPreference"
+  | "songChoice"
+  | "personalNote"
   | "revealDate"
   | "revealMode"
   | "recipientEmails"
@@ -38,7 +46,15 @@ export function buildOrderDraft(data: IntakeData): OrderDraft {
     partner2Name: data.partner2Name,
     milestone: data.milestone,
     milestoneOther: data.milestoneOther,
+    relationshipStart: data.relationshipStart,
+    howMet: data.howMet,
+    earlyDays: data.earlyDays,
+    proposalMoment: data.proposalMoment,
+    secretDetail: data.secretDetail,
     tone: data.tone,
+    musicPreference: data.musicPreference,
+    songChoice: data.songChoice,
+    personalNote: data.personalNote,
     revealDate: data.tier === "spark" ? "" : data.revealDate,
     revealMode: data.tier === "spark" ? "" : data.revealMode,
     recipientEmails: data.recipientEmails,

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FieldShell, TextField } from "@/components/intake/ui";
 import { DISPLAY_ADDON_PRICE, MILESTONE_LABELS, REVEAL_MODE_LABELS, TIER_DETAILS } from "@/lib/intake-labels";
+import { orderTotal, submitOrder } from "@/lib/submit-order";
 import { clearOrderDraft, loadOrderDraft, type OrderDraft } from "@/lib/order-draft";
 import { generateOrderId } from "@/lib/ids";
 import { createOrder } from "@/lib/orders";
@@ -37,14 +38,6 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
       </span>
     </div>
   );
-}
-
-function orderTotal(draft: OrderDraft): number {
-  if (draft.tier === "") return 0;
-  const base = TIER_DETAILS[draft.tier].price;
-  // Heirloom's Display is bundled into its price already — don't double-charge.
-  const addon = draft.displayAddon && draft.tier !== "heirloom" ? DISPLAY_ADDON_PRICE : 0;
-  return base + addon;
 }
 
 function OrderSummary({ draft }: { draft: OrderDraft }) {
@@ -147,6 +140,8 @@ export function CheckoutClient() {
   const [loaded, setLoaded] = useState(false);
   const [draft, setDraft] = useState<OrderDraft | null>(null);
   const [payment, setPayment] = useState<PaymentForm>(emptyPayment);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   useEffect(() => {
     const loadedDraft = loadOrderDraft();
@@ -167,9 +162,21 @@ export function CheckoutClient() {
     payment.expiry.trim() !== "" &&
     payment.cvc.trim() !== "";
 
-  const handlePay = () => {
-    if (!paymentValid || !draft) return;
+  const handlePay = async () => {
+    if (!paymentValid || !draft || submitting) return;
+    setSubmitting(true);
+    setSubmitError(false);
     const orderId = generateOrderId();
+    try {
+      // Send to the studio first — if this fails, keep the visitor on the
+      // page with their draft intact rather than confirming an order we
+      // never received.
+      await submitOrder(orderId, payment.contactEmail.trim(), draft);
+    } catch {
+      setSubmitError(true);
+      setSubmitting(false);
+      return;
+    }
     createOrder(orderId, draft);
     clearOrderDraft();
     router.push(`/order/${orderId}/confirmation`);
@@ -269,11 +276,22 @@ export function CheckoutClient() {
           <button
             type="button"
             onClick={handlePay}
-            disabled={!paymentValid}
+            disabled={!paymentValid || submitting}
             className="mt-12 w-full rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep disabled:cursor-not-allowed disabled:bg-forest/25 disabled:text-ivory/50 disabled:hover:bg-forest/25"
           >
-            {tier ? `Complete Payment — $${orderTotal(draft)}` : "Complete Payment"}
+            {submitting
+              ? "Sending…"
+              : tier
+              ? `Complete Payment — $${orderTotal(draft)}`
+              : "Complete Payment"}
           </button>
+
+          {submitError ? (
+            <p role="alert" className="mt-4 font-sans text-[14px] text-charcoal/80">
+              We couldn&rsquo;t send your order just now. Please check your
+              connection and try again &mdash; nothing has been lost.
+            </p>
+          ) : null}
 
           <p className="mt-4 font-sans text-[13px] italic text-charcoal/40">
             Demo checkout — no payment is actually processed.
