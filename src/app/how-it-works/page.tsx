@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PRIMARY_CTA } from "@/lib/flags";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import {
@@ -175,10 +176,10 @@ export default function HowItWorksPage() {
               Ready to <span className="font-bold">tell your story</span>?
             </h2>
             <Link
-              href="/start"
+              href={PRIMARY_CTA.href}
               className="mt-10 inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
             >
-              Begin Your Story
+              {PRIMARY_CTA.label}
             </Link>
           </div>
         </section>

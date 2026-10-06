@@ -37,15 +37,21 @@ export function TextField({
   onChange,
   placeholder,
   type = "text",
+  autoComplete,
+  inputMode,
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
   type?: string;
+  autoComplete?: string;
+  inputMode?: "text" | "email" | "tel" | "numeric";
 }) {
   return (
     <input
       type={type}
+      autoComplete={autoComplete}
+      inputMode={inputMode}
       value={value}
       placeholder={placeholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}

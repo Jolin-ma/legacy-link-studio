@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FilmPanel } from "@/components/film-panel";
 import { TIER_DETAILS } from "@/lib/intake-labels";
+import { CHECKOUT_ENABLED, PRIMARY_CTA } from "@/lib/flags";
 
 const steps = [
   {
@@ -74,11 +75,17 @@ export default function HomePage() {
           </h1>
           <div className="mt-10">
             <Link
-              href="/start"
+              href={PRIMARY_CTA.href}
               className="inline-flex items-center rounded-full border border-ivory/50 px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-espresso"
             >
-              Begin your story
+              {PRIMARY_CTA.label}
             </Link>
+            {CHECKOUT_ENABLED ? null : (
+              <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ivory/70">
+                We&rsquo;re opening to our first couples soon. Get on the list and you&rsquo;ll
+                hear first.
+              </p>
+            )}
           </div>
         </div>
       </FilmPanel>
@@ -222,10 +229,10 @@ export default function HomePage() {
             Let&rsquo;s <span className="font-bold">make it one</span>.
           </h2>
           <Link
-            href="/start"
+            href={PRIMARY_CTA.href}
             className="mt-10 inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
           >
-            Begin your story
+            {PRIMARY_CTA.label}
           </Link>
         </div>
         <div className="grid grid-cols-2">
