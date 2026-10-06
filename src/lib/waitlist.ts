@@ -33,7 +33,7 @@ export const WAITLIST_TIERS: {
     value: "heirloom",
     name: "Heirloom",
     price: TIER_DETAILS.heirloom.price,
-    line: "Everything in Forever, plus a printed keepsake card with your capsule link.",
+    line: "Everything in Forever, plus the Display device, a small screen loaded with your film.",
   },
 ];
 
