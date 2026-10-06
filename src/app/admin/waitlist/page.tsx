@@ -46,8 +46,8 @@ export default async function AdminWaitlistPage() {
   if (rows === null) {
     return (
       <main className="mx-auto max-w-3xl px-6 py-20 font-sans text-[15px] text-charcoal/70">
-        Supabase isn&rsquo;t configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY — until
-        then, signups are forwarded to the Formspree inbox.
+        Signups are going to Formspree for now — view and export them from the Formspree
+        dashboard. This page fills in once SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set.
       </main>
     );
   }

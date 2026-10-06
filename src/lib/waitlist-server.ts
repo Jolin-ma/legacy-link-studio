@@ -68,17 +68,53 @@ export function isDatabaseConfigured() {
   return supabase() !== null;
 }
 
-/** Inserts, or updates the existing row when the email is already on the list. */
+const BUYER_LABELS = { couple: "Their own story", gift: "A gift" } as const;
+const OCCASION_LABELS = {
+  wedding: "Wedding",
+  anniversary: "Anniversary",
+  proposal: "Proposal",
+  other: "Something else",
+} as const;
+const TIER_LABELS = { spark: "Spark", forever: "Forever", heirloom: "Heirloom", unsure: "Not sure yet" } as const;
+
+/** Labelled fields so the Formspree email and dashboard read like a signup sheet. Empty fields are dropped. */
+function formspreePayload(row: SignupRow) {
+  const month = row.occasion_month
+    ? new Date(`${row.occasion_month}T00:00:00`).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+    : "Not sure yet";
+  const fields: Record<string, string> = {
+    _subject: `Waitlist: ${row.first_name} — ${TIER_LABELS[row.tier_interest]}`,
+    email: row.email,
+    "First name": row.first_name,
+    For: BUYER_LABELS[row.buyer_type],
+    Occasion: OCCASION_LABELS[row.occasion],
+    When: month,
+    Tier: TIER_LABELS[row.tier_interest],
+    "Behind-the-scenes updates": row.marketing_opt_in ? "Yes" : "No",
+    "UTM source": row.utm_source ?? "",
+    "UTM medium": row.utm_medium ?? "",
+    "UTM campaign": row.utm_campaign ?? "",
+    "UTM content": row.utm_content ?? "",
+    Referrer: row.referrer ?? "",
+    "Landing page": row.landing_path ?? "",
+  };
+  return Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== ""));
+}
+
+/**
+ * Saves a signup. With Supabase configured it upserts on email; otherwise
+ * (the current setup) it posts to the Formspree form, where a repeat email
+ * arrives as a new submission rather than updating the old one.
+ */
 export async function saveSignup(row: SignupRow): Promise<void> {
   const db = supabase();
   if (!db) {
-    // Supabase not configured yet — don't lose the signup, send it to the Formspree inbox.
     const res = await fetch(FORMSPREE_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: `Waitlist signup — ${row.first_name}`, ...row }),
+      body: JSON.stringify(formspreePayload(row)),
     });
-    if (!res.ok) throw new Error(`Formspree fallback failed (${res.status})`);
+    if (!res.ok) throw new Error(`Formspree submission failed (${res.status})`);
     return;
   }
 
