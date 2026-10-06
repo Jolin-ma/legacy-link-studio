@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { CHECKOUT_ENABLED } from "@/lib/flags";
 import { DISPLAY_ADDON_PRICE, HEIRLOOM_SEPARATE_PRICE, TIER_DETAILS } from "@/lib/intake-labels";
 
 export const metadata: Metadata = { title: "Pricing — Legacy Link Studio" };
 
 const tiers = [
   {
+    slug: "spark",
     name: "Spark",
     price: `$${TIER_DETAILS.spark.price}`,
     format: "Self-serve photo booth",
@@ -16,6 +18,7 @@ const tiers = [
     displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },
   {
+    slug: "forever",
     name: "Forever",
     price: `$${TIER_DETAILS.forever.price}`,
     format: "Commissioned film",
@@ -24,6 +27,7 @@ const tiers = [
     displayLine: `Add the Display device at checkout for +$${DISPLAY_ADDON_PRICE}.`,
   },
   {
+    slug: "heirloom",
     name: "Heirloom",
     price: `$${TIER_DETAILS.heirloom.price}`,
     format: "Commissioned film",
@@ -68,6 +72,14 @@ export default function PricingPage() {
                 <p className="mt-3 font-sans text-[13px] text-forest">
                   {tier.displayLine}
                 </p>
+                {CHECKOUT_ENABLED ? null : (
+                  <Link
+                    href={`/waitlist?tier=${tier.slug}`}
+                    className="mt-8 inline-flex items-center rounded-full border border-charcoal/30 px-6 py-3 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-forest hover:bg-forest hover:text-ivory"
+                  >
+                    Join the waitlist
+                  </Link>
+                )}
               </div>
             ))}
           </div>
@@ -84,20 +96,31 @@ export default function PricingPage() {
             Display device is something you can actually wrap.
           </p>
 
-          <div className="mt-16 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-            <Link
-              href="/start"
-              className="inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
-            >
-              Begin Your Story
-            </Link>
-            <Link
-              href="/gift"
-              className="font-sans text-sm text-charcoal/50 underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-forest"
-            >
-              Or start the gift flow instead
-            </Link>
-          </div>
+          {CHECKOUT_ENABLED ? (
+            <div className="mt-16 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+              <Link
+                href="/start"
+                className="inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
+              >
+                Begin Your Story
+              </Link>
+              <Link
+                href="/gift"
+                className="font-sans text-sm text-charcoal/50 underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-forest"
+              >
+                Or start the gift flow instead
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-16">
+              <Link
+                href="/waitlist"
+                className="inline-flex items-center rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep"
+              >
+                Join the waitlist
+              </Link>
+            </div>
+          )}
         </div>
       </main>
       <SiteFooter />

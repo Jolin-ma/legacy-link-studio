@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CHECKOUT_ENABLED, PRIMARY_CTA } from "@/lib/flags";
 
 const navLinks = [
   { href: "/how-it-works", label: "How It Works" },
@@ -34,18 +35,18 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
             </Link>
           ))}
           <Link
-            href="/start"
+            href={PRIMARY_CTA.href}
             className="rounded-full border border-current/40 px-5 py-2 font-sans text-[13px] uppercase tracking-wider2 transition-colors duration-300 hover:border-current"
           >
-            Begin Your Story
+            {PRIMARY_CTA.label}
           </Link>
         </nav>
 
         <Link
-          href="/start"
+          href={PRIMARY_CTA.href}
           className="font-sans text-[13px] uppercase tracking-wider2 md:hidden"
         >
-          Begin
+          {CHECKOUT_ENABLED ? "Begin" : "Waitlist"}
         </Link>
       </div>
 

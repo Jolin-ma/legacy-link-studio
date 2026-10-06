@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fraunces, inter } from "@/lib/fonts";
+import { AttributionCapture } from "@/components/attribution-capture";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <AttributionCapture />
+        {children}
+      </body>
     </html>
   );
 }
