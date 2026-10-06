@@ -24,8 +24,8 @@ Status snapshot of the build against `legacy-link-site-spec.md` and `legacy-link
 | `/waitlist` | ✅ Live | Waitlist mode (2026-10-06): 4-step form (who it's for → occasion + month → tier → name/email), crossfade steps, thin progress line, `?tier=` preselects. Posts to `/api/waitlist`. |
 | `/waitlist/thanks` | ✅ Live | Shows first name, Instagram + TikTok links, share link. |
 | `/admin/waitlist` | 🟡 Locked | Basic auth via `ADMIN_PASSWORD`; only shows data once Supabase is configured. Use the Formspree dashboard for now. |
-| `/start` `/gift` | ⏸ Redirected | Redirect to `/waitlist` while checkout is off (UTMs kept). Intake still built:  Intake: green progress bar, green radio/checkbox fills, green focus underline, green pill "Continue" |
-| `/checkout` | ⏸ Redirected | Redirects to `/waitlist` while checkout is off. Still built:  Green eyebrows/price, green pill "Complete Payment" (full-width, green disabled state) |
+| `/start` `/gift` | ⏸ Redirected | Redirect to `/waitlist` while checkout is off (UTMs kept). Intake still built: green progress bar, green radio/checkbox fills, green focus underline, green pill "Continue" |
+| `/checkout` | ⏸ Redirected | Redirects to `/waitlist` while checkout is off. Still built: green eyebrows/price, green pill "Complete Payment" (full-width, green disabled state) |
 | `/order/[id]/confirmation` `/order/[id]/status` | ✅ Migrated | Green eyebrows, outline-pill demo controls, green focus on date input |
 | `/capsule/[token]` | ✅ Migrated | forest-light "unlocks in" line, ivory-outline pill unlock button; Spark gallery chrome left minimal per prior note |
 | `/about` | ✅ Rebuilt | "Join us" treatment: oversized centred title, rose-gradient band with frosted-glass problem cards, bold thesis line, full-bleed still, "how we work" principle grid, narrative + quote, giant wordmark |
