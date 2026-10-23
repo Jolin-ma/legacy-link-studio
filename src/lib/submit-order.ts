@@ -51,6 +51,8 @@ function buildPayload(orderId: string, contactEmail: string, draft: OrderDraft) 
     "Order ID": orderId,
     Package: tierLabel,
     Total: `$${orderTotal(draft)}`,
+    // No processor yet — the studio emails a payment link by hand.
+    Payment: "Unpaid — send invoice",
     "Gift from": draft.giverName,
     "Giver email": draft.giverEmail,
     "Notify giver": draft.notifyMode === "on_ready" ? "When ready" : draft.notifyMode === "at_reveal" ? "At reveal" : "",

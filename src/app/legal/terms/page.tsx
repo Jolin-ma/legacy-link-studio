@@ -41,8 +41,8 @@ const sections: LegalSection[] = [
   {
     heading: "6. Pricing, payment, and production timing",
     paragraphs: [
-      "Current pricing for each package is listed on our Pricing page at the time you order. Payment is due in full at checkout, processed by a third-party payment processor — we never see or store your full card details.",
-      "Most films are delivered within 7–10 days of a completed order, though this is an estimate, not a guaranteed delivery date, and can vary with order volume or the complexity of your story.",
+      "Current pricing for each package is listed on our Pricing page at the time you order. Nothing is charged when you place an order. We email an invoice with a secure payment link for the full amount, processed by a third-party payment processor — we never see or store your full card details. Production begins once the invoice is paid, and an order left unpaid for 14 days may be cancelled.",
+      "Most films are delivered within 7–10 days of a paid order, though this is an estimate, not a guaranteed delivery date, and can vary with order volume or the complexity of your story.",
     ],
   },
   {

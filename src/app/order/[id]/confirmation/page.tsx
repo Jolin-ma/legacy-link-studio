@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { OrderConfirmationClient } from "@/components/order/order-confirmation-client";
 
-export const metadata: Metadata = { title: "Order Confirmed — Legacy Link Studio" };
+export const metadata: Metadata = { title: "Order Placed — Legacy Link Studio" };
 
 export default async function OrderConfirmationPage({
   params,

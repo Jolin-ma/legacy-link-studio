@@ -24,7 +24,7 @@ export function OrderConfirmationClient({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-xl px-6 py-32 text-center md:px-10">
       <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
-        Order Confirmed
+        Order Placed
       </p>
       <h1 className="mt-6 font-display text-4xl font-normal leading-[1.08] md:text-5xl">
         {isSpark
@@ -37,8 +37,8 @@ export function OrderConfirmationClient({ id }: { id: string }) {
       </h1>
       <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
         {isSpark
-          ? "We've received your photos and generation is underway — your gallery link is ready below."
-          : "We've received everything and production begins now, with an estimated delivery in 7–10 days."}
+          ? "We've received your photos. Watch your inbox for a secure payment link within one business day — generation begins as soon as it's paid."
+          : "We've received everything. Watch your inbox for a secure payment link within one business day — production begins as soon as it's paid, with an estimated delivery in 7–10 days."}
       </p>
       <p className="mt-10 font-sans text-xs uppercase tracking-wider2 text-charcoal/40">
         Order #{id}

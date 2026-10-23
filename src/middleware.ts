@@ -10,6 +10,13 @@ export function middleware(req: NextRequest) {
     return checkAdminAuth(req);
   }
 
+  // Checkout is open: send old waitlist links (bios, shared posts) to the intake.
+  if (CHECKOUT_ENABLED && pathname === "/waitlist") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/start";
+    return NextResponse.redirect(url, 307);
+  }
+
   if (!CHECKOUT_ENABLED && GATED_PATHS.includes(pathname)) {
     const url = req.nextUrl.clone(); // keeps the query string, so UTMs survive
     url.pathname = "/waitlist";
@@ -37,5 +44,5 @@ function checkAdminAuth(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/start", "/checkout", "/gift", "/admin/:path*"],
+  matcher: ["/start", "/checkout", "/gift", "/waitlist", "/admin/:path*"],
 };
