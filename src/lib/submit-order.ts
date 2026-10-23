@@ -6,6 +6,7 @@ import {
   TONE_LABELS,
 } from "./intake-labels";
 import type { OrderDraft } from "./order-draft";
+import { readAttribution } from "./attribution";
 
 /**
  * Formspree form "Legacy Link Studio Orders". The endpoint is public by
@@ -81,6 +82,7 @@ function buildPayload(orderId: string, contactEmail: string, draft: OrderDraft) 
           .filter(Boolean)
           .join(", ")
       : "",
+    ...readAttribution(),
   };
 
   return Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== ""));

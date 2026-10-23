@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FilmPanel } from "@/components/film-panel";
 import { TIER_DETAILS } from "@/lib/intake-labels";
-import { CHECKOUT_ENABLED, PRIMARY_CTA } from "@/lib/flags";
+import { PRIMARY_CTA } from "@/lib/cta";
 
 const steps = [
   {
@@ -80,12 +80,6 @@ export default function HomePage() {
             >
               {PRIMARY_CTA.label}
             </Link>
-            {CHECKOUT_ENABLED ? null : (
-              <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ivory/70">
-                We&rsquo;re opening to our first couples soon. Get on the list and you&rsquo;ll
-                hear first.
-              </p>
-            )}
           </div>
         </div>
       </FilmPanel>
