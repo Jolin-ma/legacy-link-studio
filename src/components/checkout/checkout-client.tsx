@@ -10,21 +10,7 @@ import { clearOrderDraft, loadOrderDraft, type OrderDraft } from "@/lib/order-dr
 import { generateOrderId } from "@/lib/ids";
 import { createOrder } from "@/lib/orders";
 
-interface PaymentForm {
-  contactEmail: string;
-  cardName: string;
-  cardNumber: string;
-  expiry: string;
-  cvc: string;
-}
-
-const emptyPayment: PaymentForm = {
-  contactEmail: "",
-  cardName: "",
-  cardNumber: "",
-  expiry: "",
-  cvc: "",
-};
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   if (!value) return null;
@@ -139,7 +125,8 @@ export function CheckoutClient() {
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const [draft, setDraft] = useState<OrderDraft | null>(null);
-  const [payment, setPayment] = useState<PaymentForm>(emptyPayment);
+  const [contactEmail, setContactEmail] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
@@ -147,23 +134,16 @@ export function CheckoutClient() {
     const loadedDraft = loadOrderDraft();
     setDraft(loadedDraft);
     if (loadedDraft?.giverEmail) {
-      setPayment((prev) => ({ ...prev, contactEmail: loadedDraft.giverEmail }));
+      setContactEmail(loadedDraft.giverEmail);
     }
     setLoaded(true);
   }, []);
 
-  const updatePayment = (key: keyof PaymentForm, value: string) =>
-    setPayment((prev) => ({ ...prev, [key]: value }));
+  const emailValid = EMAIL_PATTERN.test(contactEmail.trim());
+  const canPlaceOrder = emailValid && agreed;
 
-  const paymentValid =
-    payment.contactEmail.trim() !== "" &&
-    payment.cardName.trim() !== "" &&
-    payment.cardNumber.trim() !== "" &&
-    payment.expiry.trim() !== "" &&
-    payment.cvc.trim() !== "";
-
-  const handlePay = async () => {
-    if (!paymentValid || !draft || submitting) return;
+  const handlePlaceOrder = async () => {
+    if (!canPlaceOrder || !draft || submitting) return;
     setSubmitting(true);
     setSubmitError(false);
     const orderId = generateOrderId();
@@ -171,7 +151,7 @@ export function CheckoutClient() {
       // Send to the studio first — if this fails, keep the visitor on the
       // page with their draft intact rather than confirming an order we
       // never received.
-      await submitOrder(orderId, payment.contactEmail.trim(), draft);
+      await submitOrder(orderId, contactEmail.trim(), draft);
     } catch {
       setSubmitError(true);
       setSubmitting(false);
@@ -227,63 +207,56 @@ export function CheckoutClient() {
 
         <div className="md:border-l md:hairline md:pl-16">
           <p className="font-sans text-[13px] uppercase tracking-wider2 text-forest">
-            Payment Details
+            Payment
+          </p>
+          <p className="mt-6 font-sans text-[15px] leading-relaxed text-charcoal/70">
+            Nothing is charged today. Once you place your order, we&rsquo;ll
+            email a secure payment link for the total within one business day.
+            Production begins as soon as it&rsquo;s paid.
           </p>
 
-          <div className="mt-8 space-y-10">
-            <FieldShell label="Email for your receipt" required>
+          <div className="mt-10 space-y-10">
+            <FieldShell label="Email for your payment link and receipt" required>
               <TextField
                 type="email"
-                value={payment.contactEmail}
-                onChange={(v) => updatePayment("contactEmail", v)}
+                value={contactEmail}
+                onChange={setContactEmail}
                 placeholder="you@email.com"
               />
             </FieldShell>
 
-            <FieldShell label="Name on card" required>
-              <TextField
-                value={payment.cardName}
-                onChange={(v) => updatePayment("cardName", v)}
+            <label className="flex cursor-pointer items-start gap-3 font-sans text-[14px] leading-relaxed text-charcoal/70">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-1 h-4 w-4 shrink-0 accent-forest"
               />
-            </FieldShell>
-
-            <FieldShell label="Card number" required>
-              <TextField
-                value={payment.cardNumber}
-                onChange={(v) => updatePayment("cardNumber", v)}
-                placeholder="4242 4242 4242 4242"
-              />
-            </FieldShell>
-
-            <div className="grid grid-cols-2 gap-10">
-              <FieldShell label="Expiry" required>
-                <TextField
-                  value={payment.expiry}
-                  onChange={(v) => updatePayment("expiry", v)}
-                  placeholder="MM / YY"
-                />
-              </FieldShell>
-              <FieldShell label="CVC" required>
-                <TextField
-                  value={payment.cvc}
-                  onChange={(v) => updatePayment("cvc", v)}
-                  placeholder="123"
-                />
-              </FieldShell>
-            </div>
+              <span>
+                I agree to the{" "}
+                <Link
+                  href="/legal/terms"
+                  target="_blank"
+                  className="underline decoration-charcoal/30 underline-offset-4 hover:text-forest"
+                >
+                  terms of service
+                </Link>{" "}
+                and understand my order starts once the invoice is paid.
+              </span>
+            </label>
           </div>
 
           <button
             type="button"
-            onClick={handlePay}
-            disabled={!paymentValid || submitting}
+            onClick={handlePlaceOrder}
+            disabled={!canPlaceOrder || submitting}
             className="mt-12 w-full rounded-full bg-forest px-8 py-3.5 font-sans text-[13px] uppercase tracking-wider2 text-ivory transition-colors duration-300 hover:bg-forest-deep disabled:cursor-not-allowed disabled:bg-forest/25 disabled:text-ivory/50 disabled:hover:bg-forest/25"
           >
             {submitting
               ? "Sending…"
               : tier
-              ? `Complete Payment — $${orderTotal(draft)}`
-              : "Complete Payment"}
+              ? `Place Order — $${orderTotal(draft)}`
+              : "Place Order"}
           </button>
 
           {submitError ? (
@@ -292,10 +265,6 @@ export function CheckoutClient() {
               connection and try again &mdash; nothing has been lost.
             </p>
           ) : null}
-
-          <p className="mt-4 font-sans text-[13px] italic text-charcoal/40">
-            Demo checkout — no payment is actually processed.
-          </p>
         </div>
       </div>
     </div>

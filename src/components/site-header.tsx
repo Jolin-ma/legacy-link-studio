@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CHECKOUT_ENABLED, PRIMARY_CTA } from "@/lib/flags";
+import { PRIMARY_CTA } from "@/lib/cta";
 
 const navLinks = [
   { href: "/how-it-works", label: "How It Works" },
@@ -46,7 +46,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
           href={PRIMARY_CTA.href}
           className="font-sans text-[13px] uppercase tracking-wider2 md:hidden"
         >
-          {CHECKOUT_ENABLED ? "Begin" : "Waitlist"}
+          Begin
         </Link>
       </div>
 

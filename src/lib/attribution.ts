@@ -1,4 +1,4 @@
-/** First-touch attribution for the visit, captured once and sent with the waitlist form. */
+/** First-touch attribution for the visit, captured once and sent with the order. */
 
 export const ATTRIBUTION_KEYS = [
   "utm_source",
